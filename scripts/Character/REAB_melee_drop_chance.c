@@ -42,7 +42,7 @@ modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 		{
 			WeaponSlotComponent slot = GetWpnSlot();
 			
-            DropWeapon(slot);
+           	DropWeapon(slot);
             if (DEBUG) Print("Weapon dropped!!!");
 		}
 
