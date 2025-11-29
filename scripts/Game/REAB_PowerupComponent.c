@@ -27,8 +27,10 @@ FEATURES:
 ------------------------------------------------------------------------------
 OPTIMIZE:
 ------------------------------------------------------------------------------
+	+ Redundant physics definition every frame in Fly() method?
+		(returning early if no movement input)
+
 	- Implement tickrate system?
-	- Redundant physics definition every frame in Fly() method?
 ------------------------------------------------------------------------------
 BUGS:
 ------------------------------------------------------------------------------
@@ -44,15 +46,29 @@ enum CharState
 
 class REAB_PowerupComponent : ScriptComponent
 {
+	protected static ResourceName PARTICLE_PATH = "{AEA751F0BE7FE821}Particles/Vehicle/Vehicle_smoke_car_exhaust_damage.ptc";
+	
 	protected SCR_CharacterControllerComponent character;
 	protected CharState state = CharState.GROUNDED;
 	protected IEntity charEntity;
 	
-	protected float force = 25;
-	
+	protected float force = 10;
 	protected bool jumpPressed = false;
 
-
+	//---------------------------------------------------------------------------------------------------------------
+	// handle enum states
+	void PlayParticles()
+	{
+		vector parentTransform[4];
+		ParticleEffectEntitySpawnParams spawnParams = new ParticleEffectEntitySpawnParams();
+	
+		GetOwner().GetWorldTransform(parentTransform);
+		spawnParams.Parent = GetOwner();
+		spawnParams.UseFrameEvent = true;
+		
+		ParticleEffectEntity.SpawnParticleEffect(PARTICLE_PATH, spawnParams);
+	}
+		
 	//---------------------------------------------------------------------------------------------------------------
 	// handle enum states
 	void UpdateState()
@@ -105,11 +121,12 @@ class REAB_PowerupComponent : ScriptComponent
 	}
 	
 	//---------------------------------------------------------------------------------------------------------------
-	void detectJumpInput() { jumpPressed = GetGame().GetInputManager().GetActionValue("CharacterSprint") > 0; }
+	void DetectJumpInput() { jumpPressed = GetGame().GetInputManager().GetActionValue("CharacterSprint") > 0; }
 	
 	//---------------------------------------------------------------------------------------------------------------
 	override void OnPostInit(IEntity owner)
 	{
+		PlayParticles();
 		SetEventMask(owner, EntityEvent.FRAME);
 	}
 
@@ -118,8 +135,9 @@ class REAB_PowerupComponent : ScriptComponent
 	{
 		if (!Replication.IsServer())
 			return;
-		
+
 		// character wearing this entity
+		
 		charEntity = owner.GetRootParent();
 
 		if (!charEntity)
@@ -133,9 +151,10 @@ class REAB_PowerupComponent : ScriptComponent
 				return;
 		}
 		
-		// handle enums
+		// handle states
+		
 		UpdateState();
-		detectJumpInput();
+		DetectJumpInput();
 		
 		switch (state)
 		{
