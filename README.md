@@ -1,2 +1,2 @@
 # Arma-Reforger-enfusion-scripts
-My collection of scripts for arma refoger.
+My collection of Enfusion scripts for Arma Refoger mods.
