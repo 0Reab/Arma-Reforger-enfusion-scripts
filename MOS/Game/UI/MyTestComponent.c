@@ -12,6 +12,8 @@ class MyComponent : ScriptedWidgetComponent
 	[Attribute("1", desc: "Items amount respectively")] // 1 is auto default value for item
 	protected ref array<int> item_amount;
 	
+	protected string formattedResult;
+	
 	
 	//------------------------------------------------------------------------------------------------
 	override bool OnMouseEnter(Widget w, int x, int y)
@@ -39,36 +41,63 @@ class MyComponent : ScriptedWidgetComponent
 			
 			int missingAmount = PlayerHasItem(player, itemPrefab, itemAmount);
 			
-			Show(itemName, missingAmount);
+			UpdateResult(itemName, missingAmount);
+			// concat formatted string: "itemName add/remove missingAmount\n"
 		}
 				
 		return true;		
+	}
+		
+	//------------------------------------------------------------------------------------------------
+	protected void UpdateResult(string itemName, int missingAmount)
+	{	
+		// cli debug
+			
+		if (missingAmount > 0)
+			formattedResult += string.Format("Add %1 %2x\n", itemName, missingAmount);
+		
+		if (missingAmount < 0)
+			formattedResult += string.Format("Remove %1 %2x\n", itemName, Math.AbsInt(missingAmount));
+		
+		// gui widget
+		
+		bool silent = true;
+		int duration = 7;
+		string name = "Inventory check result";
+
+		SCR_HintManagerComponent hintManager = SCR_HintManagerComponent.GetInstance();
+		if (hintManager)
+			hintManager.ShowCustomHint(formattedResult, name, duration, silent);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	override bool OnClick(Widget w, int x, int y, int button)
 	{
-		return true; // -> not implemented
+		bool silent = true;
+		int duration = 4;
+		string name = "name";
+		string desc = "descr";
+		
+		//ShowCustomHint
+		//SCR_HintManagerComponent : SCR_BaseGameModeComponent
+		
+		SCR_HintManagerComponent hintManager = SCR_HintManagerComponent.GetInstance();
+		if (hintManager)
+			hintManager.ShowCustomHint(desc, name, duration, silent);
+		
+		return true;
 	}
 	
 	// only rifle + pistol -> for now idek
 	//------------------------------------------------------------------------------------------------
 	protected bool CheckAmmo(IEntity player)
-	{
-		/* add -> BaseWeaponComponent.GetWeaponType();
-		returns:
-		enum EWeaponType (non comprehensive list)
-		{
-			WT_RIFLE,
-			WT_GRENADELAUNCHER,
-			WT_SNIPERRIFLE,
-			WT_ROCKETLAUNCHER,
-			WT_MACHINEGUN,
-			WT_HANDGUN,
-		} */
-		
+	{	
 		SCR_CharacterInventoryStorageComponent inventory = SCR_CharacterInventoryStorageComponent.Cast(player.FindComponent(SCR_CharacterInventoryStorageComponent));
 		if (!inventory)
+			return false;
+		
+		SCR_InventoryStorageManagerComponent inventoryManager = SCR_InventoryStorageManagerComponent.Cast(player.FindComponent(SCR_InventoryStorageManagerComponent));
+		if (!inventoryManager)
 			return false;
 		
 		BaseWeaponComponent weaponComp = BaseWeaponComponent.Cast(inventory.FindComponent(BaseWeaponComponent));
@@ -97,23 +126,12 @@ class MyComponent : ScriptedWidgetComponent
 				case EWeaponType.WT_HANDGUN: // do int 4
 			}
 			
-			int magCount = inventory.GetMagazineCountByWeapon(weaponComp);
+			int magCount = inventoryManager.GetMagazineCountByWeapon(weaponComp);
 			
-			// check loaded mag
-			// by BaseWeaponComponent.GetWeaponType() check against 10 and 4 -> (AR, pistol)
+			// check if wpn has loaded mag then decrement for int 1 to compensate.
 		}
 
 		return true;
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	protected void Show(string itemName, int missingAmount)
-	{		
-		if (missingAmount > 0)
-			PrintFormat("Add %1 %2x", itemName, missingAmount);
-		
-		if (missingAmount < 0)
-			PrintFormat("Remove %1 %2x", itemName, Math.AbsInt(missingAmount));
 	}
 	
 	// only need ChimeraCharacter for the inventory atm.
