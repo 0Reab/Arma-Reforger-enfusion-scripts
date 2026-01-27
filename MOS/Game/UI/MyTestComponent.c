@@ -2,6 +2,9 @@
 - somehow display a message for missing items.
 - store misssing items and their amounts for later use.
 - override onclick method -> add missing items when in arsenal not any storage comp.
+
+- fix ammo check method
+- frag check method has a bug where if two frags are in inventory but not in weapon slots it will misscoun them as one excess
 */
 
 class MyComponent : ScriptedWidgetComponent
@@ -13,11 +16,12 @@ class MyComponent : ScriptedWidgetComponent
 	protected ref array<int> item_amount;
 	
 	protected string formattedResult;
+	protected ref map<ResourceName, int> resultMap = new map<ResourceName, int>; // name : amount needed (amount can be positive or negative int)
 	
 	
 	//------------------------------------------------------------------------------------------------
-	override bool OnMouseEnter(Widget w, int x, int y)
-	{		
+	override bool OnClick(Widget w, int x, int y, int button)
+	{
 		if (!ValidConfig())
 		{
 			Print("item list and amount array missmatch");
@@ -28,9 +32,10 @@ class MyComponent : ScriptedWidgetComponent
 		if (!player) return false;
 		
 		CheckGadgets(player);
+		resultMap.Clear();
 		
 		int len = item_list.Count();
-		
+
 		for (int i=0; i < len; i++) // for item, amount in list; do
 		{
 			ResourceName itemPrefab = item_list[i];
@@ -41,28 +46,51 @@ class MyComponent : ScriptedWidgetComponent
 			
 			int missingAmount = PlayerHasItem(player, itemPrefab, itemAmount);
 			
-			UpdateResult(itemName, missingAmount);
-			// concat formatted string: "itemName add/remove missingAmount\n"
+			UpdateResult(itemPrefab, itemName, missingAmount);
 		}
-				
+		
+		CheckAmmo(player);
+		ShowResult();
+		formattedResult = "";
+		
+		return true;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	override bool OnMouseEnter(Widget w, int x, int y)
+	{				
 		return true;		
 	}
-		
+	
 	//------------------------------------------------------------------------------------------------
-	protected void UpdateResult(string itemName, int missingAmount)
-	{	
-		// cli debug
-			
+	protected void AddItems(IEntity player) // only a reminder -> server-side implementation for later
+	{
+		SCR_InventoryStorageManagerComponent mgr = SCR_InventoryStorageManagerComponent.Cast(player.FindComponent(SCR_InventoryStorageManagerComponent));
+		BaseInventoryStorageComponent storage = BaseInventoryStorageComponent.Cast(player.FindComponent(BaseInventoryStorageComponent));
+
+        //mgr.TrySpawnPrefabToStorage(prefab, storage);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void UpdateResult(ResourceName itemPrefab, string itemName, int missingAmount)
+	{
+		if (missingAmount == 0)
+			return;
+		
 		if (missingAmount > 0)
 			formattedResult += string.Format("Add %1 %2x\n", itemName, missingAmount);
 		
 		if (missingAmount < 0)
 			formattedResult += string.Format("Remove %1 %2x\n", itemName, Math.AbsInt(missingAmount));
 		
-		// gui widget
-		
+		resultMap.Insert(itemPrefab, missingAmount);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void ShowResult()
+	{
 		bool silent = true;
-		int duration = 7;
+		int duration = 60;
 		string name = "Inventory check result";
 
 		SCR_HintManagerComponent hintManager = SCR_HintManagerComponent.GetInstance();
@@ -70,68 +98,65 @@ class MyComponent : ScriptedWidgetComponent
 			hintManager.ShowCustomHint(formattedResult, name, duration, silent);
 	}
 	
-	//------------------------------------------------------------------------------------------------
-	override bool OnClick(Widget w, int x, int y, int button)
-	{
-		bool silent = true;
-		int duration = 4;
-		string name = "name";
-		string desc = "descr";
-		
-		//ShowCustomHint
-		//SCR_HintManagerComponent : SCR_BaseGameModeComponent
-		
-		SCR_HintManagerComponent hintManager = SCR_HintManagerComponent.GetInstance();
-		if (hintManager)
-			hintManager.ShowCustomHint(desc, name, duration, silent);
-		
-		return true;
-	}
-	
 	// only rifle + pistol -> for now idek
 	//------------------------------------------------------------------------------------------------
-	protected bool CheckAmmo(IEntity player)
+	protected bool CheckAmmo(ChimeraCharacter player)
 	{	
-		SCR_CharacterInventoryStorageComponent inventory = SCR_CharacterInventoryStorageComponent.Cast(player.FindComponent(SCR_CharacterInventoryStorageComponent));
-		if (!inventory)
-			return false;
+		int totalMags = 0;
 		
-		SCR_InventoryStorageManagerComponent inventoryManager = SCR_InventoryStorageManagerComponent.Cast(player.FindComponent(SCR_InventoryStorageManagerComponent));
-		if (!inventoryManager)
-			return false;
+		SCR_InventoryStorageManagerComponent inventoryManager = GetInventoryManager(player);
+	    if (!inventoryManager)
+	        return 0;
 		
-		BaseWeaponComponent weaponComp = BaseWeaponComponent.Cast(inventory.FindComponent(BaseWeaponComponent));
-		if (!weaponComp)
-			return false;
+		BaseWeaponManagerComponent weaponManager = BaseWeaponManagerComponent.Cast(
+        	player.FindComponent(BaseWeaponManagerComponent)
+		);
+		if (!weaponManager)
+			return 0;
 		
-		array<BaseMuzzleComponent> muzzles = {};
-		weaponComp.GetMuzzlesList(muzzles);
-		Print(muzzles);
+		array<BaseWeaponComponent> weapons = new array<BaseWeaponComponent>;
+		weaponManager.GetWeapons(weapons);
 		
-		foreach (BaseMuzzleComponent muzzleComp : muzzles)
+		int count = 0;
+		foreach (BaseWeaponComponent wpn : weapons)
 		{
-			if (!muzzleComp)
+			count ++;
+			if (!wpn)
 				continue;
+
+			totalMags = inventoryManager.GetMagazineCountByWeapon(wpn);
 			
-			if (muzzleComp.IsDisposable())
-				continue;
-			
-			EWeaponType wpnType = weaponComp.GetWeaponType();
-			
-			switch (wpnType)
+			string weaponType;
+			switch (count)
 			{
-				case EWeaponType.WT_RIFLE: // do int 10
-				case EWeaponType.WT_SNIPERRIFLE: // do int 5 idk
-				case EWeaponType.WT_MACHINEGUN: // do int 4 idk
-				case EWeaponType.WT_HANDGUN: // do int 4
+				case 3: weaponType = "Primary"; break;
+				case 4: weaponType = "Secondary"; break;
+				case 5: weaponType = "Sidearm"; break;
 			}
 			
-			int magCount = inventoryManager.GetMagazineCountByWeapon(weaponComp);
+			if (IsWpnLoaded(wpn))
+				totalMags++; // add one if mag loaded
 			
-			// check if wpn has loaded mag then decrement for int 1 to compensate.
+			if (weaponType != "")
+				formattedResult += string.Format("%1 ammo %2x\n", weaponType, totalMags);
 		}
-
-		return true;
+	    return 0;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected bool IsWpnLoaded(BaseWeaponComponent wpn)
+	{
+		array<BaseMuzzleComponent> muzzles = {};
+		wpn.GetMuzzlesList(muzzles);
+		    
+		foreach (BaseMuzzleComponent muzzle : muzzles)
+		{
+			if (muzzle && !muzzle.IsDisposable() && muzzle.GetMagazine())
+		    {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	// only need ChimeraCharacter for the inventory atm.
@@ -163,10 +188,10 @@ class MyComponent : ScriptedWidgetComponent
 		IEntity binos = gadgetManager.GetGadgetByType(EGadgetType.BINOCULARS); 
 		IEntity watch = gadgetManager.GetGadgetByType(EGadgetType.WRISTWATCH);
 		IEntity nvgs = gadgetManager.GetGadgetByType(EGadgetType.NIGHT_VISION); 
-			
-		if (binos && watch && nvgs) return; // you have all needed gadgets - good
 		
-		Print(binos); Print(watch); Print(nvgs); // debug
+		if (!binos) formattedResult += "Add Binoculars\n"; 
+		if (!watch) formattedResult += "Add Watch\n"; 
+		if (!nvgs) formattedResult += "Add Night Vision\n"; 
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -218,7 +243,7 @@ class MyComponent : ScriptedWidgetComponent
 	protected int PlayerHasItem(IEntity player, ResourceName itemPrefab, int amountGoal=1)
 	{
 	    // Get the player's inventory component
-	    InventoryStorageManagerComponent inventory = InventoryStorageManagerComponent.Cast(player.FindComponent(InventoryStorageManagerComponent));
+	    SCR_InventoryStorageManagerComponent inventory = GetInventoryManager(player);
 	    if (!inventory) return false; // bool on int method?
 		
 		// parse inventory slots
@@ -253,5 +278,11 @@ class MyComponent : ScriptedWidgetComponent
 			return 1;
 		
 		return 0;
+	}
+	
+	protected SCR_InventoryStorageManagerComponent GetInventoryManager(IEntity player)
+	{
+		SCR_InventoryStorageManagerComponent inventory = SCR_InventoryStorageManagerComponent.Cast(player.FindComponent(SCR_InventoryStorageManagerComponent));
+		return inventory;
 	}
 }
