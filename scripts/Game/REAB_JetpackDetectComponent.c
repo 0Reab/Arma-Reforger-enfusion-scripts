@@ -1,16 +1,17 @@
-[ComponentEditorProps(category: "Movement/Character", description: "script component for enabling/disabling jetpack script")]
+[ComponentEditorProps(category: "REAB_ScriptComponents/Jetpack", description: "script component for enabling/disabling jetpack script")]
 class REAB_JetpackDetectComponentClass : ScriptComponentClass {}
 
 
 class REAB_JetpackDetectComponent : ScriptComponent
 {
 	protected SCR_CharacterControllerComponent character;
+	protected REAB_JetpackParticlesComponent particles;
 	protected REAB_JetpackFlyingComponent jetpack;
+	protected REAB_JetpackSoundsComponent sounds;
 	
 	
 	override void OnPostInit(IEntity owner)
 	{
-		Print("test comp OK");
 		SetEventMask(owner, EntityEvent.SIMULATE);
 	}
 
@@ -18,28 +19,23 @@ class REAB_JetpackDetectComponent : ScriptComponent
 	override void OnAddedToParent(IEntity child, IEntity parent)
 	{
 		super.OnAddedToParent(child, parent);
-		
-		Print("added to parent");
-		
+				
 		if (!parent)
 			return;
 
 		jetpack = REAB_JetpackFlyingComponent.Cast(parent.FindComponent(REAB_JetpackFlyingComponent));
 		if (!jetpack)
-		{
-			Print("no jetpack comp");
 			return;
-		}
 			
 		character = SCR_CharacterControllerComponent.Cast(parent.FindComponent(SCR_CharacterControllerComponent));
 		if (!character)
-		{
-			Print("no char contrl comp");
 			return;
-		}
+		
+		/*particles = REAB_JetpackParticlesComponent.Cast(parent.FindComponent(REAB_JetpackParticlesComponent));
+		if (!particles)
+			return; */
 			
-		Print(jetpack.Enable_REAB());
-		jetpack.PlayParticles_REAB("smoke");
+		jetpack.Enable_REAB();
 	}
 	
 	//---------------------------------------------------------------------------------------------------------------
@@ -47,10 +43,7 @@ class REAB_JetpackDetectComponent : ScriptComponent
 	{
 		super.OnRemovedFromParent(child, parent);
 		
-		Print("removed from parent");
-		
 		if (jetpack)
-			Print(jetpack.Disable_REAB());
-			jetpack.StopParticles_REAB("smoke");
+			jetpack.Disable_REAB();
 	}
 }

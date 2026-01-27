@@ -1,51 +1,20 @@
-[ComponentEditorProps(category: "Movement/Character", description: "Jetpack script component for flying")]
+[ComponentEditorProps(category: "REAB_ScriptComponents/BaseCharacter", description: "Jetpack script component for flying")]
 class REAB_JetpackFlyingComponentClass : ScriptComponentClass {}
 
 /*
 ------------------------------------------------------------------------------
 TODO:
 ------------------------------------------------------------------------------
-	+ add enum states for future proofing, lol
-	+ get parent character of clothing
-	+ define physics
-	+ character movement input vector get method
-	+ test if global character controller works, update docs if it does
-	x run script only server-side -> EOnFrame(); has to be both client & serv
-	+ jump button input for Z axis in movement vector method -> GetDirection()
-	+ finish return vector -> GetDirection()
-	+ apply impulse to character
-	+ bug fix world relative inputs to char
-	+ bug fix ApplyImuplse now works, jetpack is enabled on equip
-	+ physics has to be on character entity - child to parent does not work
-	+ split in two components, manager and phys handler kidna
-	+ add this script component to human base prefab (not just US base)
-	+ flame particle not turning off, call turn off at grounded too
-	+ handle particles properly
-	+ document new particle methods
 ------------------------------------------------------------------------------
 FEATURES:
 ------------------------------------------------------------------------------
-	- feather the impulse strength?
-	- fuel mechanics?
-	- particles, with replication for learning?
-	- leaning character for "realistic" flying"?
-	- different xy/z force values?
 	- enable shooting while flying?
-	- add sound to jetpack?
-------------------------------------------------------------------------------
-OPTIMIZE:
-------------------------------------------------------------------------------
-	+ Redundant physics definition every frame in Fly() method?
-		(returning early if no movement input)
-		and defined only on first method call
-
-	- Implement tickrate system? prolly no need
+	- hover on current height mode?
 ------------------------------------------------------------------------------
 BUGS:
 ------------------------------------------------------------------------------
-	- flame particle not replicated on other clients by default like smoke
-	- do i need on delete method?
-	
+	- do i need on delete method? test needed
+	- i think particles are spawning every frame, nice one bro
 ------------------------------------------------------------------------------
 */
 
@@ -58,77 +27,42 @@ enum CharState
 
 class REAB_JetpackFlyingComponent : ScriptComponent
 {
-
-	protected ref map<string, ParticleEffectEntity> activeParticles = new map<string, ParticleEffectEntity>();
-	protected static ref map<string, ResourceName> PARTICLE_PATHS = new map<string, ResourceName>();
-
-	protected static ResourceName SMOKE_PARTICLE_PATH = "{AEA751F0BE7FE821}Particles/Vehicle/Vehicle_smoke_car_exhaust_damage.ptc";
-	protected static ResourceName FLAME_PARTICLE_PATH = "{A8D906F1965C5277}Particles/Weapon/Custom_Jetpack_Trail_M229.ptc";
-
+	// character
 	protected SCR_CharacterControllerComponent character;
 	protected CharState state = CharState.GROUNDED;
+	protected CharState statePrevious;
 	protected Physics charPhysics;
 	protected IEntity charEntity;
 
-	protected float force = 25;
+	// flying
+	protected float force = 100;
 	protected bool jumpPressed = false;
 	protected bool jetpackPowerupWorn = false;
-
-
+	
+	// particles & audio
+	protected REAB_JetpackParticlesComponent particles;
+	protected REAB_JetpackSoundsComponent sounds;
+	
+	
+	// #### PUBLIC METHODS ####
 	//------------------------------------------------------------------------------------------------
-	// particle start handler
-	// manage a hashmap with active particles -> key is "particle type" and value is "particle entity"
-	//! \param[in] particleType -> such as "smoke", "flame"
-	void PlayParticles_REAB(string particleType)
-	{
-		if (activeParticles.Contains(particleType) && activeParticles.Get(particleType))
-		{
-			return;
-		}
-
-		ResourceName particlePath;
-		if (!PARTICLE_PATHS.Find(particleType, particlePath))
-		{
-			PrintFormat("Unkown particle type %1", particleType, LogLevel.WARNING);
-		}
-		
-		vector parentTransform[4];
-		ParticleEffectEntitySpawnParams spawnParams = new ParticleEffectEntitySpawnParams();
-
-		GetOwner().GetWorldTransform(parentTransform);
-		spawnParams.Parent = GetOwner();
-		spawnParams.UseFrameEvent = true;
-
-		ParticleEffectEntity particle = ParticleEffectEntity.SpawnParticleEffect(particlePath, spawnParams);
-		if (particle)
-		{
-			particle.Play();
-			activeParticles.Set(particleType, particle);
-		}
-	}
-
-	//------------------------------------------------------------------------------------------------
-	// particle stop handler
-	// manage a hashmap with active particles -> key is "particle type" and value is "particle entity"
-	//! \param[in] particleType -> such as "smoke", "flame"
-	void StopParticles_REAB(string particleType)
-	{
-		ParticleEffectEntity particle;
-		if (activeParticles.Find(particleType, particle) && particle)
-		{
-			particle.Stop();
-			activeParticles.Remove(particleType);
-		}
-	}	
+	void Enable_REAB() { jetpackPowerupWorn = true; }
+	void Disable_REAB() { jetpackPowerupWorn = false; }
 
 	//------------------------------------------------------------------------------------------------
 	// handle enum states
 	protected void UpdateState()
 	{
 		if (character.IsFalling())
+		{
+			statePrevious = state;
 			state = CharState.JUMPING;
+		}
 		else
+		{
+			statePrevious = state;
 			state = CharState.GROUNDED;
+		}
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -136,12 +70,11 @@ class REAB_JetpackFlyingComponent : ScriptComponent
 	//! \param[out] movementInput
 	protected vector GetDirection()
 	{
-		//return vector.Up;
 		vector movementVector = character.GetMovementInput();
 
 		if (!movementVector && !jumpPressed)
 		{
-			StopParticles_REAB("flame");
+			sounds.StopSound_REAB();	
 			return vector.Zero;
 		}
 
@@ -150,9 +83,9 @@ class REAB_JetpackFlyingComponent : ScriptComponent
 			movementVector += vector.Up;
 
 		vector result = charEntity.VectorToParent(movementVector);
-
-		//Print(result * force);
-		PlayParticles_REAB("flame");
+		
+		sounds.PlaySound_REAB();//"SOUND_JETPACK_THRUST"
+				
 		return result;
 	}
 
@@ -169,34 +102,46 @@ class REAB_JetpackFlyingComponent : ScriptComponent
 			charPhysics = character.GetOwner().GetPhysics();
 			return;
 		}
-		else
-		{
-			charPhysics.ApplyImpulse(movementInput * force);
-		}
+		
+		float forceMod = character.GetDynamicSpeed(); // 0 to 1 float
+		
+		charPhysics.ApplyImpulse(movementInput * (force * forceMod));
 	}
-
+	
+	// #### HELPER METHODS ####
+	//------------------------------------------------------------------------------------------------
+	protected void GetCharacterController(IEntity e) { character = SCR_CharacterControllerComponent.Cast(e.FindComponent(SCR_CharacterControllerComponent)); }
+	//------------------------------------------------------------------------------------------------
+	protected void GetParticlesComponent(IEntity e) { particles = REAB_JetpackParticlesComponent.Cast(e.FindComponent(REAB_JetpackParticlesComponent)); }
+	//------------------------------------------------------------------------------------------------
+	protected void GetSoundsComponent(IEntity e) { sounds = REAB_JetpackSoundsComponent.Cast(e.FindComponent(REAB_JetpackSoundsComponent)); }
 	//------------------------------------------------------------------------------------------------
 	protected void DetectJumpInput() { jumpPressed = GetGame().GetInputManager().GetActionValue("CharacterSprint") > 0; }
+	//------------------------------------------------------------------------------------------------
+	protected void SetDynamicSpeed(float speed) { if (state != statePrevious) { character.SetDynamicSpeed(speed); }} // based on first frame of character state change -> set speed to arg
 
-	// could refactor this dumbass code later
+	//------------------------------------------------------------------------------------------------
+	protected void HandleParticles(vector movement)
+	{
+		if (movement != vector.Zero)
+		{
+			particles.PlayThrusterParticles_REAB(true);
+			return;
+		}
+		
+		particles.StopThrusterParticles_REAB(false);
+	}
 	
-	//------------------------------------------------------------------------------------------------
-	// set jetpack functionality ON
-	bool Enable_REAB() { jetpackPowerupWorn = true; return true; }
-
-	//------------------------------------------------------------------------------------------------
-	// set jetpack functionality ON
-	bool Disable_REAB() { jetpackPowerupWorn = false; return false; }
-
+	// #### OVERRIDE METHODS ####
 	//------------------------------------------------------------------------------------------------
 	override void OnPostInit(IEntity owner)
 	{
-		if (PARTICLE_PATHS.Count() == 0)
-		{
-			PARTICLE_PATHS.Insert("smoke", SMOKE_PARTICLE_PATH);
-			PARTICLE_PATHS.Insert("flame", FLAME_PARTICLE_PATH);
-		}
-
+		GetCharacterController(owner);
+		GetParticlesComponent(owner);
+		GetSoundsComponent(owner);
+		
+		charEntity = owner;
+		
 		SetEventMask(owner, EntityEvent.FRAME);
 	}
 
@@ -205,24 +150,26 @@ class REAB_JetpackFlyingComponent : ScriptComponent
 	{
 		if (!jetpackPowerupWorn)
 			return;
-
-		// character wearing this entity
-
-		charEntity = owner;//.GetRootParent();
-
-		if (!charEntity)
-		{
+		
+		if (!character || !charEntity)
+		{	
+			GetCharacterController(owner);
 			return;
 		}
-
-		if (!character || character.GetOwner() != charEntity)
+		
+		if (!particles || !sounds)
 		{
-			character = SCR_CharacterControllerComponent.Cast(charEntity.FindComponent(SCR_CharacterControllerComponent));
-			if (!character)
-				return;
+			GetParticlesComponent(owner);
+			GetSoundsComponent(owner);
+			return;
 		}
-
-		// handle states
+		
+		if (character.IsDead())
+		{
+			particles.StopAllParticles_REAB();
+			sounds.StopSound_REAB();
+			return;
+		}
 
 		UpdateState();
 		DetectJumpInput();
@@ -230,11 +177,18 @@ class REAB_JetpackFlyingComponent : ScriptComponent
 		switch (state)
 		{
 			case CharState.JUMPING:
-				Fly(GetDirection());
+			
+				vector direction = GetDirection();
+				SetDynamicSpeed(0.25);
+				Fly(direction);
+				HandleParticles(direction);
 				break;
 
 			case CharState.GROUNDED:
-				StopParticles_REAB("flame");
+			
+				SetDynamicSpeed(1);
+				particles.StopAllParticles_REAB();
+				sounds.StopSound_REAB();
 				break;
 		}
 	}
