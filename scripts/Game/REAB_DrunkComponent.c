@@ -1,231 +1,267 @@
 [ComponentEditorProps(category: "REAB", description: "Drunk effects on player")]
 class REAB_DrunkComponentClass : ScriptComponentClass {}
 
+
+// add tickrate
+
+
 class REAB_DrunkComponent : ScriptComponent
 {
-	// Core components
 	protected SCR_CharacterControllerComponent character;
 	protected CharacterInputContext input;
+	protected SCR_CarControllerComponent car;
+	protected VehicleWheeledSimulation vehicle;
 	
-	// Drunk state
-	protected bool isDrunk = false;
-	protected int drinkCount = 0;
-	protected float drunkTimer = 0;
+    protected float baseTimer;
+	protected float effectDuration;
+	protected float tickrate;
 	
-	// Tick system
-	protected float tickTimer = 0;
-	protected bool shouldTick = false;
+	protected float chanceValue_FALL = 0.05;
+	protected float chanceValue_DRIVE = 0.25;
+	protected float chanceValue_LEAN = 1;
 	
-	// Active effect state
-	protected ref TurningEffect walkTurn;
-	protected ref TurningEffect driveTurn;
+	protected bool ontick = false;
+    protected bool isDrunk = false;
+	
+	protected static int DELAY = 3;
+	
+	protected int drinksAmount = 0;
+	protected int actionChance;
+	protected int doTurning;
+	protected int doTurning_driving;
+	protected float actionInput;
+	protected float change_walking;
+	protected float change_driving;
+
 	
 	//------------------------------------------------------------------------------------------------
 	void IsDrunk_REAB()
 	{
 		isDrunk = true;
-		drinkCount++;
-		Print(string.Format("[Drunk] Drinks: %1", drinkCount));
+		drinksAmount += 1;
+
+		// increase effects strength according to amount of drinks
+		
+		chanceValue_FALL *= drinksAmount / 10;
+		chanceValue_LEAN *= drinksAmount / 10;
+		chanceValue_DRIVE *= drinksAmount / 10;
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	override void OnPostInit(IEntity owner)
 	{
 		SetEventMask(owner, EntityEvent.FRAME);
-		character = SCR_CharacterControllerComponent.Cast(owner.FindComponent(SCR_CharacterControllerComponent));
+
+        character = SCR_CharacterControllerComponent.Cast(owner.FindComponent(SCR_CharacterControllerComponent));
 		
 		if (character)
 			input = character.GetInputContext();
-		
-		Print("[Drunk] Component initialized");
+
+		Print("DEBUG INIT");
 	}
+		
+	//------------------------------------------------------------------------------------------------
+    void HandleTime(float timeSlice)
+    {
+		if (isDrunk && baseTimer >= 100) // in seconds
+		{
+			Print("drunk state finished");
+			
+			baseTimer = 0;
+			effectDuration = 0;
+			tickrate = 0;
+			
+			isDrunk = false;	
+			drinksAmount = 0;
+			return;
+		}
+		
+		baseTimer += timeSlice;
+		effectDuration += timeSlice;
+		tickrate += timeSlice;
+		
+		if (tickrate >= DELAY)
+		{
+			tickrate = 0;
+			ontick = !ontick; // switch
+		}
+    }
 	
 	//------------------------------------------------------------------------------------------------
-	override void EOnFrame(IEntity owner, float timeSlice)
+    void Drunk_Speed()
+    {
+		character.SetDynamicSpeed(actionInput);
+    }
+	
+	//------------------------------------------------------------------------------------------------
+    void Drunk_Lean()
+    {
+        input.SetLean(Math.RandomFloatInclusive(-chanceValue_LEAN, chanceValue_LEAN));
+    }
+	
+	//------------------------------------------------------------------------------------------------
+    void Drunk_Drop()
+    {
+		if (actionChance == 1 && character.IsPlayerControlled())
+        	character.ActionDropItem();
+    }
+	
+	//------------------------------------------------------------------------------------------------
+    void Drunk_Stance()
+    {
+        character.SetDynamicStance(actionInput);
+    }
+
+	//------------------------------------------------------------------------------------------------
+    void Drunk_Move()
+    {
+		if (inVehicle())
+			return;
+		
+		if (doTurning)
+		{
+			float currentAngle = input.GetAimingAngles()[0] / 3;
+			
+			//Print(change_walking);
+			
+			float targetAngle = input.GetAimingAngles()[0] + change_walking;
+			
+			input.SetLean(targetAngle);
+			character.SetHeadingAngle(targetAngle, true);
+			
+			float fall_chance = chanceValue_FALL * 0.90;
+			Print(fall_chance);
+			Print(change_walking);
+			
+			if (!inVehicle() && Math.AbsFloat(change_walking) >= fall_chance && doTurning <= 30)
+			{
+				Print("Drunk_Move -> Ragdoll");
+				character.Ragdoll();
+			}
+			
+			doTurning -= 1;
+			return;
+		}
+			
+		if (actionChance >= 10 - drinksAmount) // could be bug here
+		{
+			doTurning = Math.RandomIntInclusive(25,200); // duration for method calls
+			change_walking = Math.RandomFloatInclusive(-chanceValue_FALL, chanceValue_FALL); // amount
+		}
+	}
+	
+	//------------------------------------------------------------------------------------------------	
+	void Drunk_Fall()
 	{
-		super.EOnFrame(owner, timeSlice);
-		
-		if (!isDrunk)
-			return;
-		
-		// Validate components
-		if (!character || !input)
+		if (actionChance == 0 && !inVehicle())
 		{
-			character = SCR_CharacterControllerComponent.Cast(owner.FindComponent(SCR_CharacterControllerComponent));
-			if (character)
-				input = character.GetInputContext();
-			return;
-		}
-		
-		// Update timers
-		drunkTimer += timeSlice;
-		tickTimer += timeSlice;
-		
-		// End drunk effect after 100 seconds
-		if (drunkTimer >= 100)
-		{
-			isDrunk = false;
-			drinkCount = 0;
-			drunkTimer = 0;
-			walkTurn = null;
-			driveTurn = null;
-			Print("[Drunk] Effect ended");
-			return;
-		}
-		
-		// Tick every 3 seconds
-		if (tickTimer >= 3)
-		{
-			tickTimer = 0;
-			shouldTick = !shouldTick;
-		}
-		
-		// Apply ongoing effects
-		if (walkTurn)
-		{
-			ApplyWalkTurn();
-			return;
-		}
-		
-		if (driveTurn)
-		{
-			ApplyDriveTurn();
-			return;
-		}
-		
-		// Apply new random effects on tick
-		if (shouldTick)
-		{
-			ApplyRandomEffects();
+			//Print("Drunk_Fall");
+			// if character.iscontrllled or smt
+			//character.Ragdoll();
 		}
 	}
-	
+
 	//------------------------------------------------------------------------------------------------
-	protected void ApplyRandomEffects()
+	void Drunk_Drive()
 	{
-		int roll = Math.RandomInt(0, 10);
-		float drunkLevel = drinkCount * 0.1;
+		if (!inVehicle())
+			return;
 		
-		// Random lean
-		float leanAmount = Math.RandomFloatInclusive(-1.0, 1.0) * drunkLevel;
-		input.SetLean(leanAmount);
-		
-		// Random speed/stance
-		character.SetDynamicSpeed(Math.RandomFloat(0, 1));
-		character.SetDynamicStance(Math.RandomFloat(0, 1));
-		
-		// Random drop
-		if (roll == 1 && character.IsPlayerControlled())
-			character.ActionDropItem();
-		
-		// Start walking turn
-		int threshold = Math.Max(10 - drinkCount, 1);
-		if (roll >= threshold && !IsInVehicle())
+		if (doTurning_driving)
 		{
-			walkTurn = new TurningEffect();
-			walkTurn.duration = Math.RandomIntInclusive(25, 200);
-			walkTurn.amount = Math.RandomFloatInclusive(-0.05, 0.05) * drunkLevel;
-			Print(string.Format("[Drunk] Walk turn started: duration=%1, amount=%2", walkTurn.duration, walkTurn.amount));
+			if (!car)
+			{
+				car = SCR_CarControllerComponent.Cast(GetOwner().GetRootParent().FindComponent(SCR_CarControllerComponent));
+				return;
+			}
+			
+			if (!vehicle)
+			{
+				vehicle = car.GetWheeledSimulation(); // or this? GetSimulation();
+				return;
+			}
+			
+			float current_steer = vehicle.GetSteering();
+			
+			vehicle.SetSteering(change_driving + current_steer); //Math.RandomFloatInclusive(-1,1));
+			doTurning_driving -= 1;
+			return;
 		}
 		
-		// Start driving swerve
-		if (roll >= 5 && IsInVehicle())
+		if (actionChance >= 5)
 		{
-			driveTurn = new TurningEffect();
-			driveTurn.duration = Math.RandomIntInclusive(25, 200);
-			driveTurn.amount = Math.RandomFloatInclusive(-0.25, 0.25) * drunkLevel;
-			Print(string.Format("[Drunk] Drive swerve started: duration=%1, amount=%2", driveTurn.duration, driveTurn.amount));
+			if (doTurning_driving)
+				return;
+			doTurning_driving = Math.RandomIntInclusive(25,200); // duration for method calls
+			change_driving = Math.RandomFloatInclusive(-chanceValue_DRIVE, chanceValue_DRIVE); // amount
+			Print(change_driving);
 		}
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	protected void ApplyWalkTurn()
-	{
-		if (IsInVehicle())
-		{
-			walkTurn = null;
-			return;
-		}
-		
-		float currentAngle = input.GetAimingAngles()[0];
-		float targetAngle = currentAngle + walkTurn.amount;
-		
-		input.SetLean(walkTurn.amount);
-		character.SetHeadingAngle(targetAngle, true);
-		
-		// Fall if turning too hard near start
-		float drunkLevel = drinkCount * 0.1;
-		float fallThreshold = 0.05 * drunkLevel * 0.9;
-		if (Math.AbsFloat(walkTurn.amount) >= fallThreshold && walkTurn.duration >= 170)
-		{
-			Print("[Drunk] Falling from turn");
-			character.Ragdoll();
-		}
-		
-		walkTurn.duration--;
-		if (walkTurn.duration <= 0)
-		{
-			walkTurn = null;
-			Print("[Drunk] Walk turn ended");
-		}
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	protected void ApplyDriveTurn()
-	{
-		if (!IsInVehicle())
-		{
-			driveTurn = null;
-			return;
-		}
-		
-		IEntity vehicle = GetOwner().GetRootParent();
-		if (!vehicle)
-		{
-			driveTurn = null;
-			return;
-		}
-		
-		SCR_CarControllerComponent car = SCR_CarControllerComponent.Cast(vehicle.FindComponent(SCR_CarControllerComponent));
-		if (!car)
-		{
-			driveTurn = null;
-			return;
-		}
-		
-		VehicleWheeledSimulation sim = car.GetWheeledSimulation();
-		if (!sim)
-		{
-			driveTurn = null;
-			return;
-		}
-		
-		float currentSteering = sim.GetSteering();
-		sim.SetSteering(currentSteering + driveTurn.amount);
-		
-		driveTurn.duration--;
-		if (driveTurn.duration <= 0)
-		{
-			driveTurn = null;
-			Print("[Drunk] Drive swerve ended");
-		}
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	protected bool IsInVehicle()
+	bool inVehicle()
 	{
 		SCR_ChimeraCharacter chimera = SCR_ChimeraCharacter.Cast(GetOwner());
 		if (chimera)
 			return chimera.IsInVehicle();
 		
-		return false;
+		return true;
 	}
-}
+	
+	//------------------------------------------------------------------------------------------------
+	override void EOnFrame(IEntity owner, float timeSlice)
+	{
+        super.EOnFrame(owner, timeSlice);
 
-//------------------------------------------------------------------------------------------------
-// Helper class to track turning effects
-class TurningEffect
-{
-	int duration;
-	float amount;
+        if (!isDrunk)
+        {
+			//Print("not drunk");
+            return; // for debugging temporary
+        }
+
+        if (!character || !input)
+        {
+			Print("no character || input");
+            character = SCR_CharacterControllerComponent.Cast(owner.FindComponent(SCR_CharacterControllerComponent));
+			input = character.GetInputContext();
+            return;
+        }
+
+        HandleTime(timeSlice);
+		
+		if (doTurning)
+		{
+			Drunk_Move();
+			return;
+		}
+		
+		if (doTurning_driving)
+		{	
+			Drunk_Drive();
+			return;
+		}
+		
+		if (!ontick)
+		{
+			return;
+		}
+		
+		actionInput = Math.RandomFloat(0,1);
+		actionChance = Math.RandomInt(0, 10);
+		
+		Drunk_Drive();
+		Drunk_Fall();
+		Drunk_Stance();
+		Drunk_Speed();
+		Drunk_Drop();
+		Drunk_Move();
+	
+		/*	
+		Drunk_Fall();
+		Drunk_Stance();
+		Drunk_Speed();
+		Drunk_Drop();
+		Drunk_Move();
+		*/     
+	}
 }
