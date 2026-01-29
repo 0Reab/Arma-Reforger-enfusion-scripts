@@ -14,6 +14,8 @@ class REAB_TeleportPlayerComponent: ScriptComponent
 	{
 		REAB_passed_check = state;
 		Replication.BumpMe();
+		TeleportPlayer();
+		Rpc(RpcDo_Teleport);
 	}
 	
 	//------------------------------------------------------------------------------------------------
