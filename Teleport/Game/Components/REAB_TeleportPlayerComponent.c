@@ -6,45 +6,46 @@ class REAB_TeleportPlayerComponent: ScriptComponent
 	protected vector destination[4];
 	protected string m_EntityName = "REAB_TeleportReciever";
 	
-	[RplProp()]
-	bool REAB_passed_check;
 
 	//------------------------------------------------------------------------------------------------
-	void update_pass(bool state)
+	bool RpcRequest_Teleport()
 	{
-		REAB_passed_check = state;
-		Replication.BumpMe();
-		TeleportPlayer();
+		bool pos_result = GetTeleportPosition();
+		bool tp_result = TeleportPlayer();
+		
+		bool success = pos_result && tp_result;
+		
 		Rpc(RpcDo_Teleport);
+		return success;
 	}
-	
+
 	//------------------------------------------------------------------------------------------------
     [RplRpc(RplChannel.Reliable, RplRcver.Owner)]
     void RpcDo_Teleport()
     {
-        Print("teleporting ...");
 		GetTeleportPosition();
         TeleportPlayer();
 		Print(destination);
     }
 	
 	//------------------------------------------------------------------------------------------------
-    protected void GetTeleportPosition()
+    protected bool GetTeleportPosition()
 	{
 		m_TeleportReciever = GetGame().FindEntity(m_EntityName);
 		
 		if (!m_TeleportReciever)
-			return;
+			return false;
 		
 		m_TeleportReciever.GetTransform(destination);
+		return true;
 	}
 	
 	//------------------------------------------------------------------------------------------------
-    protected void TeleportPlayer()
+    protected bool TeleportPlayer()
 	{
 		IEntity player = GetOwner();
 		if (destination[3] == vector.Zero)
-			return;
+			return false;
 		
 		vector previousOrigin = player.GetOrigin();
 	
@@ -67,6 +68,7 @@ class REAB_TeleportPlayerComponent: ScriptComponent
 	    if (!ChimeraCharacter.Cast(player))
 	        player.Update();
 		
-		Print("finished tp method");
+		destination[3] = vector.Zero;
+		return true;
 	}
 }
