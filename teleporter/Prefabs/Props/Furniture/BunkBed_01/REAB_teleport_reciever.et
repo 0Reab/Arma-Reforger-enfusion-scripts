@@ -1,0 +1,25 @@
+GenericEntity : "{158A49327BE741D8}Prefabs/Props/Furniture/BunkBed_01/BunkBed_01_Mattress_base.et" {
+ ID "F0DBA538AC2A0552"
+ components {
+  REAB_TeleportRecieverComponent "{687C16515AD97768}" {
+  }
+  SCR_EditableEntityComponent "{687C16514C39EDB3}" {
+   m_UIInfo SCR_EditableEntityUIInfo "{687C165113860575}" {
+    Name "Teleport pad"
+    Description "Used as world position with tp command"
+    Icon "{D4FED4CDBD15B4D2}UI/Textures/Cursor/Editor_Waypoint_QueueSnap_uiuc.edds"
+    m_Image "{D4FED4CDBD15B4D2}UI/Textures/Cursor/Editor_Waypoint_QueueSnap_uiuc.edds"
+    m_aAuthoredLabels {
+     CONTENT_MODDED ENTITYTYPE_SYSTEM
+    }
+    m_aAutoLabels {
+    }
+   }
+   m_bStatic 1
+   m_Flags PLACEABLE
+  }
+  RplComponent "{5624A88DC2D9928D}" {
+   Enabled 1
+  }
+ }
+}

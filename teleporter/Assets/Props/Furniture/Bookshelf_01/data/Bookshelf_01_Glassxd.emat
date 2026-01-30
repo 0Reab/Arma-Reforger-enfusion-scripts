@@ -1,0 +1,11 @@
+MatPBRBasicGlass : "{B30F9A025AD24A96}Assets/Props/Furniture/Cupboard_01/data/Cupboard_01_D_Glass.emat" {
+ Emissive 1 1 1 0
+ EmissiveLV -4.866
+ DisableFog 1
+ FresnelPower 5
+ FresnelBias 0
+ RefractionIntensity 0.5
+ ChromaticIntensity 0.99
+ ApplyWorldNormal 1
+ DimIntensity 0.5
+}

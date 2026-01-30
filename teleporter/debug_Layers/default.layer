@@ -1,0 +1,7 @@
+GameEntity : "{619AE0CC35DED3CB}Prefabs/Props/Civilian/LampKerosene_01/lamp.et" {
+ coords 138.173 1 140.002
+}
+GenericEntity : "{859A17ABC1331A2C}Prefabs/Props/Civilian/ashtray.et" {
+ coords 140.067 1 139.971
+ angles 0 0 0
+}

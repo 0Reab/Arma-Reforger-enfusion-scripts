@@ -1,0 +1,4 @@
+MatPBRBasic {
+ BCRMap "{1C815DB158C67EE7}Assets/Weapons/HeavyWeapons/M2HB/Data/M2_50cal_ammoBox_BCR.edds" 
+ NMOMap "{2459E62381B12C79}Assets/Weapons/HeavyWeapons/M2HB/Data/M2_50cal_ammoBox_NMO.edds" 
+}
