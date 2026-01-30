@@ -1,0 +1,79 @@
+FrameWidgetClass {
+ {
+  FrameWidgetClass "{60DCC8DF2787CCB3}" {
+   Prefab "{60DCC8DF2787CCB3}"
+   Slot FrameWidgetSlot "{5645426F032126C2}" {
+    PositionX -0.429
+    OffsetLeft -0.429
+    PositionY -8.619
+    OffsetTop -8.619
+    SizeX 0
+    OffsetRight 0.429
+    SizeY 0
+    OffsetBottom 8.619
+   }
+  }
+  FrameWidgetClass "{60DCC8DF2787CC88}" {
+   Prefab "{60DCC8DF2787CC88}"
+   {
+    FrameWidgetClass "{60DCC8DF2787CC8A}" {
+     Prefab "{60DCC8DF2787CC8A}"
+     {
+      VerticalLayoutWidgetClass "{6878ED0ED9E7200D}" {
+       Name "VerticalLayout0"
+       Slot FrameWidgetSlot "{6878ED0ED9E72038}" {
+        SizeToContent 1
+       }
+       {
+        FrameWidgetClass "{6878ED0FC47F16F7}" : "{C74EC600AFAD3BAE}UI/layouts/Menus/Inventory/REAB_MosWidgetBase.layout" {
+         Name "REAB_MosRifleman"
+         Slot LayoutSlot "{68776A64EF9F4B3F}" {
+         }
+         {
+          SizeLayoutWidgetClass "{68776A62CE4AC610}" {
+           Prefab "{68776A62CE4AC610}"
+           {
+            OverlayWidgetClass "{68776A62AC7D27F1}" {
+             Prefab "{68776A62AC7D27F1}"
+             Slot AlignableSlot "{68776A6297E0F7A9}" {
+              HorizontalAlign 1
+              VerticalAlign 1
+             }
+            }
+           }
+          }
+         }
+        }
+        FrameWidgetClass "{6878F59D6103425E}" : "{51D5ACD2685E46D5}UI/layouts/Menus/Inventory/REAB_MosWidgetMG.layout" {
+         Name "REAB_MosMachineGunner"
+         Slot LayoutSlot "{68776A64EF9F4B3F}" {
+         }
+        }
+        FrameWidgetClass "{6878F59CCDF55B64}" : "{01A603046E98B843}UI/layouts/Menus/Inventory/REAB_MosWidgetMedic.layout" {
+         Name "REAB_MosMedic"
+         Slot LayoutSlot "{68776A64EF9F4B3F}" {
+         }
+        }
+        FrameWidgetClass "{6878F59DDCE59D7E}" : "{52B95F9DBC1EEB49}UI/layouts/Menus/Inventory/REAB_MosWidgetGrenadier.layout" {
+         Name "REAB_MosGrenadier"
+         Slot LayoutSlot "{68776A64EF9F4B3F}" {
+         }
+        }
+       }
+      }
+      VerticalLayoutWidgetClass "{60DCC8DF2787CC81}" {
+       Prefab "{60DCC8DF2787CC81}"
+       {
+        FrameWidgetClass "{60DCC8DF2787CC80}" {
+         Prefab "{60DCC8DF2787CC80}"
+         Slot LayoutSlot "{5D44B19A05C7B70A}" {
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

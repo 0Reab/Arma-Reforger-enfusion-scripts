@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{51D5ACD2685E46D5}UI/layouts/Menus/Inventory/REAB_MosWidgetMG.layout"
+ Configurations {
+  LayoutResourceClass PC {
+  }
+  LayoutResourceClass XBOX_ONE : PC {
+  }
+  LayoutResourceClass XBOX_SERIES : PC {
+  }
+  LayoutResourceClass PS4 : PC {
+  }
+  LayoutResourceClass PS5 : PC {
+  }
+  LayoutResourceClass HEADLESS : PC {
+  }
+ }
+}

@@ -1,0 +1,32 @@
+FrameWidgetClass : "{C74EC600AFAD3BAE}UI/layouts/Menus/Inventory/REAB_MosWidgetBase.layout" {
+ {
+  SizeLayoutWidgetClass "{68776A62CE4AC610}" {
+   Prefab "{68776A62CE4AC610}"
+   {
+    OverlayWidgetClass "{68776A62AC7D27F1}" {
+     Prefab "{68776A62AC7D27F1}"
+     {
+      ButtonWidgetClass "{6874F232700A0ED2}" {
+       Prefab "{6874F232700A0ED2}"
+       Color 0.424 0.3956 0.1382 1
+       components {
+        REAB_MosInventoryComponent "{68776A67020048D6}" {
+         item_list {
+          "{1663496AE5B9F10B}Prefabs/Weapons/Ammo/Ammo_Grenade_HEDP_M433.et" "{98DB57ECEDC81CC2}Prefabs/Weapons/Ammo/Ammo_Flare_40mm_M583A1_White.et"
+         }
+         item_amount {
+          12 4
+         }
+        }
+       }
+      }
+      ImageWidgetClass "{6874F23CC0936909}" {
+       Prefab "{6874F23CC0936909}"
+       Texture "{DDAEEF112BEBCF94}UI/Textures/Editor/EditableEntities/Characters/EditableEntity_Character_Grenadier.edds"
+      }
+     }
+    }
+   }
+  }
+ }
+}

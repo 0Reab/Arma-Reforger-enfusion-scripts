@@ -1,0 +1,32 @@
+FrameWidgetClass : "{C74EC600AFAD3BAE}UI/layouts/Menus/Inventory/REAB_MosWidgetBase.layout" {
+ {
+  SizeLayoutWidgetClass "{68776A62CE4AC610}" {
+   Prefab "{68776A62CE4AC610}"
+   {
+    OverlayWidgetClass "{68776A62AC7D27F1}" {
+     Prefab "{68776A62AC7D27F1}"
+     {
+      ButtonWidgetClass "{6874F232700A0ED2}" {
+       Prefab "{6874F232700A0ED2}"
+       Color 0.2248 0.2248 0.424 1
+       components {
+        REAB_MosInventoryComponent "{68776A67020048D6}" {
+         item_list {
+          "{00E36F41CA310E2A}Prefabs/Items/Medicine/SalineBag_01/SalineBag_US_01.et" "{A81F501D3EF6F38E}Prefabs/Items/Medicine/FieldDressing_01/FieldDressing_US_01.et" "{0D9A5DCF89AE7AA9}Prefabs/Items/Medicine/MorphineInjection_01/MorphineInjection_01.et"
+         }
+         item_amount {
+          4 12 6
+         }
+        }
+       }
+      }
+      ImageWidgetClass "{6874F23CC0936909}" {
+       Prefab "{6874F23CC0936909}"
+       Texture "{CDF868B16669B7EA}UI/Textures/Editor/Attributes/Arsenal/Attribute_Arsenal_Medical.edds"
+      }
+     }
+    }
+   }
+  }
+ }
+}

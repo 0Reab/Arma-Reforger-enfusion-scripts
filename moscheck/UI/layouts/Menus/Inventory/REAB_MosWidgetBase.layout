@@ -1,0 +1,67 @@
+FrameWidgetClass {
+ Name "REAB_MosWidget"
+ Slot LayoutSlot "{68776A64EF9F4B3F}" {
+  HorizontalAlign 1
+  Padding 5 5 5 5
+ }
+ "Z Order" 1
+ {
+  SizeLayoutWidgetClass "{68776A62CE4AC610}" {
+   Name "SizeLayout0"
+   Slot FrameWidgetSlot "{68776A62B03B2804}" {
+    Anchor 0 0 0 0
+    PositionX 0
+    OffsetLeft 0
+    PositionY 0
+    OffsetTop 0
+    SizeX 100
+    OffsetRight -100
+    SizeY 30
+    OffsetBottom -30
+    SizeToContent 1
+   }
+   {
+    OverlayWidgetClass "{68776A62AC7D27F1}" {
+     Name "Overlay0"
+     Slot AlignableSlot "{68776A6297E0F7A9}" {
+      HorizontalAlign 3
+      VerticalAlign 3
+     }
+     {
+      ButtonWidgetClass "{6874F232700A0ED2}" {
+       Name "REAB_MosInventory_Button"
+       Slot OverlayWidgetSlot "{6878ED0DF79BBBD3}" {
+        HorizontalAlign 3
+        VerticalAlign 3
+       }
+       "Z Order" 1
+       Opacity 0.1
+       Color 0.424 0.424 0.424 1
+       components {
+        REAB_MosInventoryComponent "{68776A67020048D6}" {
+         item_list {
+          "{6E35D94130954509}Prefabs/Items/Equipment/Accessories/ETool_ALICE/ETool_ALICE_FreeRoamBuilding_Gadget.et" "{73950FBA2D7DB5C5}Prefabs/Items/Equipment/Radios/Radio_ANPRC68.et" "{E8F00BF730225B00}Prefabs/Weapons/Grenades/Grenade_M67.et" "{0D9A5DCF89AE7AA9}Prefabs/Items/Medicine/MorphineInjection_01/MorphineInjection_01.et" "{A81F501D3EF6F38E}Prefabs/Items/Medicine/FieldDressing_01/FieldDressing_US_01.et" "{9DB69176CEF0EE97}Prefabs/Weapons/Grenades/Smoke_ANM8HC.et"
+         }
+         item_amount {
+          1 1 2 2 5 2
+         }
+        }
+       }
+      }
+      ImageWidgetClass "{6874F23CC0936909}" {
+       Name "MOS_Icon"
+       Slot OverlayWidgetSlot "{6878ED0DF79BBB23}" {
+        HorizontalAlign 3
+        VerticalAlign 3
+       }
+       Pivot 0 0
+       Texture "{71648F15B3984B87}UI/Textures/Editor/Attributes/Arsenal/Attribute_Arsenal_AssaultRifles.edds"
+       Size 42 42
+       Filter 0
+      }
+     }
+    }
+   }
+  }
+ }
+}

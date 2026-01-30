@@ -1,0 +1,32 @@
+FrameWidgetClass : "{C74EC600AFAD3BAE}UI/layouts/Menus/Inventory/REAB_MosWidgetBase.layout" {
+ {
+  SizeLayoutWidgetClass "{68776A62CE4AC610}" {
+   Prefab "{68776A62CE4AC610}"
+   {
+    OverlayWidgetClass "{68776A62AC7D27F1}" {
+     Prefab "{68776A62AC7D27F1}"
+     {
+      ButtonWidgetClass "{6874F232700A0ED2}" {
+       Prefab "{6874F232700A0ED2}"
+       Color 0.1431 0.424 0.1382 1
+       components {
+        REAB_MosInventoryComponent "{68776A67020048D6}" {
+         item_list {
+          "{9B34796F40125F85}Prefabs/Weapons/Magazines/Magazine_M240_Coax/Box_762x51_M240_coax_200rnd_Tracer.et"
+         }
+         item_amount {
+          4
+         }
+        }
+       }
+      }
+      ImageWidgetClass "{6874F23CC0936909}" {
+       Prefab "{6874F23CC0936909}"
+       Texture "{A02EB3B80E276400}UI/Textures/Editor/Attributes/Arsenal/Attribute_Arsenal_MachineGuns.edds"
+      }
+     }
+    }
+   }
+  }
+ }
+}
