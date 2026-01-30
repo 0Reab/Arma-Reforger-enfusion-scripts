@@ -1,0 +1,9 @@
+MatPBRBasic {
+ SpecularMul 0.59
+ RoughnessScale 1.507
+ MetalnessScale 0.588
+ AOScale 0.478
+ BCRMap "{80814E2E5D00A434}assets/textures/backpack35wg_base_color.edds"
+ NormalPower 4
+ NMOMap "{6FE3CACB3FF550EC}assets/textures/Backpack_map.edds"
+}

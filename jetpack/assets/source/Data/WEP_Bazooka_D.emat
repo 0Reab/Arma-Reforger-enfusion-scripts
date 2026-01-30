@@ -1,0 +1,8 @@
+MatPBRBasic {
+ SpecularMul 1.14
+ RoughnessScale 0.662
+ MetalnessScale 5
+ BCRMap "{7D14D0F390ED6FBB}assets/textures/wep_bazooka_d_base_color.edds"
+ NormalPower 4
+ NMOMap "{726244EF33252F82}assets/textures/wep_bazooka_d_normalmap.edds"
+}

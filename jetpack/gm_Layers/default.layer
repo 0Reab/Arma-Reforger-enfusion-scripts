@@ -1,0 +1,7 @@
+GenericEntity : "{06B68C58B72EAAC6}Prefabs/Items/Equipment/Backpacks/Jetpack_Backpack_ALICE_Medium.et" {
+ coords 6091.6 419.057 6350.086
+ angles 0 0 0
+}
+SCR_SpawnPoint : "{5A2220DD0C16958B}Prefabs/MP/Spawning/SpawnPoint_US.et" {
+ coords 6092.157 418.89 6349.467
+}

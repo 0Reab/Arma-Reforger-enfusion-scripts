@@ -1,0 +1,114 @@
+EffectDef {
+ Version 2
+ Emitters {
+  EmitterDef fire_sparks_01 {
+   ShapeType Point
+   ShapeSize 1 0 1
+   ConeAngle 360 0 50
+   MaxNum 20
+   BirthRate 30
+   BirthRateRND 0
+   Offset 0 0 0
+   Angles 90 0 0
+   LodMin 0
+   LodMax 0
+   Material "{D9FC42124DBB8845}Particles/_Materials/Fire/Base_Sparks_06.emat"
+   StretchMultiplier 1.05
+   SizeMultiplier 0.02
+   SizeRND 0
+   ScaleX 0.267
+   ScaleY 0.788
+   VelAngle 1
+   Velocity 5
+   VelocityRND 4
+   AirResistance 8
+   AirResistanceRND 4
+   WindInfluence 0.05
+   GravityMultiply -0.1
+   GravityMultiplyRND 3
+   RandomFrame 1
+   Lifetime 0.2
+   LifetimeRND 0.5
+   Color {
+    0 1 0.969 0.608 0.125 0.691 0.274 0.04 0.252 0.737 0.075 0.012
+   }
+   Alpha {
+    0 0 0.045 0.984 0.439 0.119 1 0
+   }
+   Size {
+    0 0 0.035 0.984 0.734 0.92 1 0
+   }
+   EmittingTime 6
+   Repeat 0
+   AlphaMast {
+    0 0 0.018 1 0.942 1 0.999 0
+   }
+   BRateMast {
+    0 0 0.012 1 0.594 0.888 0.88 0 1 0
+   }
+   VelocityMast {
+    0 0.696 0.022 1 0.193 0.952 0.255 0.576 0.379 0.52 0.912 0.448 1 0
+   }
+  }
+  EmitterDef smoke {
+   ConeAngle 360 15 30
+   ConeAngleRndRange 40
+   MaxNum 1000
+   BirthRate 3.5
+   BirthRateRND 0
+   BirthRateVel 4
+   Offset 0 0 0
+   Angles 75 0 0
+   LodMin 0
+   LodMax 2
+   Material "{31115101CCD19009}Particles/_Materials/Smoke_Flare_White.emat"
+   StretchMultiplier 0
+   SizeMultiplier 6
+   SizeRND 1
+   RotMultiplier 10
+   RotRND 30
+   RandomRotDir 1
+   BillboardingType Full
+   RandomAngle 1
+   Velocity 4.5
+   VelocityRND 1
+   AirResistance 1
+   WindInfluence 0.2
+   ParentVelRelToAir 1
+   GravityMultiply -0.15
+   NormalRestitution 0
+   TagentialRestitution 0
+   Spring 0
+   AnimFPS 40
+   LifetimeByAnim 0
+   Lifetime 6
+   LifetimeRND 4
+   Alpha {
+    0 0 0.051 0.49 0.25 0.537 0.646 0.114 1 0
+   }
+   RotationSpeed {
+    0 1 1 0.104
+   }
+   Size {
+    0 0.15 0.15 0.23 0.3 0.4 1 0.7
+   }
+   EmittingTime 60
+   Repeat 0
+   AlphaMast {
+    0 0 0.043 0.28 0.622 0.293 1 0
+   }
+   RotationSpeedMast {
+    0 1 0.15 1 0.354 1 0.65 1 1 1
+   }
+   SizeMast {
+    0 1 0.736 0.973 1 0.851
+   }
+   BRateMast {
+    0 0 0.016 1 0.667 0.904 1 0
+   }
+   VelocityMast {
+    0 0.6 0.4948 0.6 0.8182 0.7 1 0.3
+   }
+  }
+ }
+}

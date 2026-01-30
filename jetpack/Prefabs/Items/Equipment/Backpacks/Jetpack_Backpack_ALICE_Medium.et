@@ -1,0 +1,55 @@
+GenericEntity : "{09D6A1C9543E4A95}Prefabs/Items/Core/Backpack_Base.et" {
+ ID "511E9C6ADE70F798"
+ components {
+  EventHandlerManagerComponent "{670AEAFF036FAB70}" {
+   EventHandlers {
+    BaseEventHandler "{670AEAFF022D5A46}" {
+     EventName "JETPACK_THRUST"
+    }
+   }
+  }
+  SignalsManagerComponent "{670CFAD420FF5AFE}" {
+  }
+  SoundComponent "{670B46C475FF38E6}" {
+   Enabled 0
+   Filenames {
+    "{AEBAF046859E9EC8}Sounds/warning_beep.acp"
+   }
+   ScriptCallbacks 1
+   SoundPoints {
+    SoundPointInfo center {
+     PivotID "Spine4"
+    }
+   }
+  }
+  MeshObject "{511E9C6ADE70F7BD}" {
+   Object "{A950509BA655F34C}assets/source/Jetpack_weights_9.xob"
+  }
+  REAB_JetpackDetectComponent "{6704BAC63C29B93E}" {
+  }
+  REAB_JetpackParticlesComponent "{670CFAC3CD41FFF9}" {
+  }
+  SCR_UniversalInventoryStorageComponent "{5222CB03A40528FA}" {
+   Attributes SCR_ItemAttributeCollection "{5222CB039E9715D1}" {
+    ItemDisplayName UIInfo "{5222CB03904B414C}" {
+     Name "Jetpack"
+     Description "Free bird!"
+    }
+    ItemPhysAttributes ItemPhysicalAttributes PhysicalAttributes {
+     Weight 2.5
+    }
+    CustomAttributes {
+     PreviewRenderAttributes "{52BCBDD2B54658EC}" {
+      PreviewModel "{A950509BA655F34C}assets/source/Jetpack_weights_9.xob"
+     }
+    }
+   }
+  }
+  BaseLoadoutClothComponent "{511E9C6ADE70F7BB}" {
+   WornModel "{A950509BA655F34C}assets/source/Jetpack_weights_9.xob"
+   ItemModel "{D47F2C1968CBC882}assets/source/Jetpack.xob"
+  }
+ }
+ coords 0 0.684 -0.207
+ angles 0 -180 0
+}

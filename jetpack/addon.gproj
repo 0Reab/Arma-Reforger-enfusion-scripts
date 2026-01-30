@@ -1,0 +1,8 @@
+GameProject {
+ ID "jetpack"
+ GUID "67034E21F5993FE8"
+ TITLE "jetpack"
+ Dependencies {
+  "58D0FB3206B6F859"
+ }
+}

@@ -1,0 +1,148 @@
+AudioClass {
+ sounds {
+  SoundClass "6153" {
+   id 6153
+   name "SOUND_JETPACK_BEEP"
+   comment "On equip warning beep"
+   version 5
+   tl 496 -48
+   ctl 0 -24
+   ins {
+    ConnectionsClass "con:64" {
+     id 64
+     links {
+      ConnectionClass "2066:65" {
+       id 2066
+       port 65
+      }
+     }
+    }
+   }
+   outState 7179
+   outStatePort 185351
+  }
+ }
+ mixers {
+  MixerClass "7179" {
+   id 7179
+   name "OutputState 7"
+   version 4
+   tl 672 -48
+   res "{B764D803219C775E}Sounds/FinalMix.afm"
+   ins {
+    ConnectionsClass "con:185351" {
+     id 185351
+     links {
+      ConnectionClass "6153:65" {
+       id 6153
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    1048576 0
+   }
+   path "{B764D803219C775E}Sounds/FinalMix.afm"
+   inputs {
+    "WPN_Handling" "WPN_Shots" "WPN_Explosions" "WNP_BulletHits" "CHAR" "ENV_AMB_2D" "VEH_Animations" "Impacts" "Dialog" "ENV_Doors" "VEH_Engine" "VEH_Tires" "VON" "SFX" "SFX_Reverb_OBSOLETE" "VON_Reverb_Small" "Dialog_Reverb" "Impacts_EXT" "ENV_AMB_3D" "WPN_SonicCracks" "CHAR_Gear" "PA" "SFX_Reverb_Exterior" "ENV_AMB_3D_Reverb_Exterior" "SFX_Direct" "SFX_Reverb_Small" "SFX_Reverb_Medium" "SFX_Reverb_Large" "WPN_Shots_Player" "Dialog_Reverb_Small" "Dialog_Reverb_Medium" "Dialog_Reverb_Large" "WPN_TravelingProjectile" "Dialog_Delay_Exterior" "SFX_Reverb_InCabin" "VON_Reverb_Medium" "VON_Reverb_Large"
+   }
+   visiblePorts {
+    185351
+   }
+  }
+ }
+ shaders {
+  ShaderClass "2066" {
+   id 2066
+   name "Shader 2"
+   version 5
+   tl 320 -48
+   ins {
+    ConnectionsClass "con:0" {
+     id 0
+     links {
+      ConnectionClass "3100:65" {
+       id 3100
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:1" {
+     id 1
+     links {
+      ConnectionClass "4115:65" {
+       id 4115
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:2" {
+     id 2
+     links {
+      ConnectionClass "5141:65" {
+       id 5141
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:64" {
+     id 64
+     links {
+      ConnectionClass "1028:65" {
+       id 1028
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    7 0
+   }
+  }
+ }
+ amplitudes {
+  AmplitudeClass "4115" {
+   id 4115
+   name "Amplitude 4"
+   version 5
+   tl 128 64
+   curve Linear
+  }
+ }
+ frequency {
+  FrequencyClass "5141" {
+   id 5141
+   name "Frequency 5"
+   version 5
+   tl 128 128
+   enableDistanceAtt 1
+  }
+ }
+ banks_local {
+  BankLocalClass "1028" {
+   id 1028
+   name "Bank 1"
+   version 7
+   tl 128 -64
+   Samples {
+    AudioBankSampleClass "Custom_Jetpack_WarningBeep_.wav" {
+     Filename "{8D47D3E21D477C25}Sounds/Custom_Jetpack_WarningBeep_.wav"
+     Probability 100
+     Index 0
+     SampleMetadata ""
+    }
+   }
+  }
+ }
+ spatialities {
+  SpatialityClass "3100" {
+   id 3100
+   name "Spatiality 3"
+   version 5
+   tl 128 0
+   spatialFactor 1
+  }
+ }
+ version 1
+}

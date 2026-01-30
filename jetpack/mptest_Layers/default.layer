@@ -1,0 +1,20 @@
+GenericEntity {
+ coords 128.055 1 141.575
+}
+GenericEntity : "{06B68C58B72EAAC6}Prefabs/Items/Equipment/Backpacks/Jetpack_Backpack_ALICE_Medium.et" {
+ coords 125.854 1.299 142.19
+}
+GenericEntity : "{2F17BFBCDB329CCA}Prefabs/Props/Military/Compositions/US/ArsenalBox_US_Weapons.et" {
+ coords 122.709 1 141.731
+ angles 0 0 0
+}
+GenericEntity : "{45C675ED3CFBBEC5}Prefabs/Props/Military/Compositions/US/ArsenalBox_US.et" {
+ coords 125.884 1 140.829
+}
+GenericEntity : "{A28E5D231A74D95D}Prefabs/Props/Military/Compositions/US/ArsenalBox_US_Equipment.et" {
+ coords 124.247 1 141.187
+ angles 0 0 0
+}
+GenericEntity : "{BE99D77D1155B127}Prefabs/Props/Military/Arsenal/ArsenalBoxes/US/ArsenalBox_US.et" {
+ coords 122.842 1 145.558
+}

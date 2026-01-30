@@ -1,0 +1,16 @@
+SCR_ChimeraCharacter {
+ ID "520EC961A090B1EE"
+ components {
+  CharacterSoundComponent "{520EA1D2F659CF84}" {
+   Filenames + {
+    "{D8AF052EC502C548}Sounds/jet_engine.acp"
+   }
+  }
+  REAB_JetpackFlyingComponent "{67034E21103C54FA}" {
+  }
+  REAB_JetpackParticlesComponent "{670CFADA41F55FA4}" {
+  }
+  REAB_JetpackSoundsComponent "{670CFAC3DFD454CA}" {
+  }
+ }
+}
