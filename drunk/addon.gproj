@@ -1,0 +1,8 @@
+GameProject {
+ ID "drunk"
+ GUID "67217D3AFBB421FD"
+ TITLE "drunk"
+ Dependencies {
+  "58D0FB3206B6F859"
+ }
+}

@@ -1,0 +1,7 @@
+SCR_ChimeraCharacter {
+ ID "520EC961A090B1EE"
+ components {
+  REAB_DrunkComponent "{67217D3C0D395F01}" {
+  }
+ }
+}

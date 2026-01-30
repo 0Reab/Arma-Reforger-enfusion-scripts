@@ -1,0 +1,13 @@
+GenericEntity : "{3238FC0BDB67AA78}Prefabs/Items/Medicine/MorphineInjection_01/MorphineInjection_01_base.et" {
+ ID "508AB2013EEE1E00"
+ components {
+  MeshObject "{59CE87DB17B6B1C5}" {
+   Object "{240D853DBB045D05}Assets/Props/Civilian/BeerBottle_01/BeerBottle_01.xob"
+  }
+  SCR_ConsumableItemComponent "{59E68C74C5CEE74F}" {
+   m_ConsumableEffect SCR_ConsumableDrinkREAB "{59E68C74C1F3910E}" {
+   }
+   m_bAlternativeModelOnAction 0
+  }
+ }
+}

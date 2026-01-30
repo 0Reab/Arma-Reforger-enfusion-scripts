@@ -1,0 +1,26 @@
+$grp GenericEntity : "{9990B77F5099CAB8}Prefabs/Items/Medicine/MorphineInjection_01/Reab_Drink.et" {
+ {
+  coords 138.174 1.013 140.735
+ }
+ {
+  coords 138.174 1.013 140.612
+ }
+ {
+  coords 138.174 1.013 140.454
+ }
+ {
+  coords 138.174 1.013 140.858
+ }
+ {
+  coords 138.174 1.013 141.01
+ }
+ {
+  coords 138.174 1.013 141.155
+ }
+}
+Vehicle UAZ452_cargo_CIV_orange1 : "{A2E8114A16D3F822}Prefabs/Vehicles/Wheeled/UAZ452/UAZ452_cargo_CIV_orange.et" {
+ coords 136.148 1 136.296
+}
+GenericEntity : "{BE99D77D1155B127}Prefabs/Props/Military/Arsenal/ArsenalBoxes/US/ArsenalBox_US.et" {
+ coords 140.208 1 140.082
+}

@@ -1,0 +1,8 @@
+$grp GenericEntity : "{9990B77F5099CAB8}Prefabs/Items/Medicine/MorphineInjection_01/Reab_Drink.et" {
+ {
+  coords 2170.494 57.027 2096.534
+ }
+ {
+  coords 2170.728 56.969 2095.786
+ }
+}
