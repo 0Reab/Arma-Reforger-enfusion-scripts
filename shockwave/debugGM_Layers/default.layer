@@ -1,0 +1,30 @@
+GenericEntity : "{254137716C3A4870}Prefabs/shockwave_base.et" {
+ coords 2169.146 57.997 2096.059
+ scale 62.751
+}
+$grp GenericEntity : "{E9CA3B2AC17DFC2C}Prefabs/Weapons/Grenades/Grenade_M67_modded_test.et" {
+ {
+  coords 2167.392 57.029 2096.689
+  angles 0 43.303 0
+ }
+ {
+  coords 2167.216 57.029 2096.501
+  angles 0 43.303 0
+ }
+ {
+  coords 2166.953 57.029 2096.222
+  angles 0 43.303 0
+ }
+ {
+  coords 2166.676 57.029 2095.928
+  angles 0 43.303 0
+ }
+ {
+  coords 2166.791 57.029 2096.05
+  angles 0 43.303 0
+ }
+ {
+  coords 2167.084 57.029 2096.361
+  angles 0 43.303 0
+ }
+}

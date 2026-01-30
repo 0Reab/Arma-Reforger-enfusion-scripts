@@ -1,0 +1,24 @@
+MatPBRBasicGlass {
+ DiffuseIBL 0.292 0.292 0.292 1
+ ZWrite 0
+ Cull none
+ Sort translucent
+ CastShadow 0
+ NoDecals 1
+ SurfaceProperties "{3DC7C8A918E3F4A5}Common/Materials/Game/glass.gamemat"
+ BlendMode AlphaBlend
+ CavityFromAO 0.1
+ OpacityMap "{60972A1E2BFE9D6F}Assets/_SharedData/Glass/ST_Glass_Dirt_01_A.edds"
+ NormalPower 0.4
+ NMOMap "{5E9B5A9AF633BD94}Assets/_SharedData/Metal/ST_Steel_Battered_NMO.edds" clampu
+ GlobalMapsUVTransform MatUVTransform "{6050C48D97309604}" {
+  TilingU 4
+  TilingV 4
+ }
+ FresnelPower 5
+ Backscatterig 0
+ RefractionIntensity 0.1
+ ChromaticIntensity 0.25
+ ApplyWorldNormal 1
+ DimIntensity 0.25
+}

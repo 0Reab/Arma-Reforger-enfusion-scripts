@@ -1,0 +1,9 @@
+GenericEntity : "{254137716C3A4870}Prefabs/shockwave_base.et" {
+ ID "F0DBA538AC2A0552"
+ components {
+  REAB_ShockwaveComponent "{687CFA503DA95449}" {
+   limit 0.25
+   factor 20
+  }
+ }
+}

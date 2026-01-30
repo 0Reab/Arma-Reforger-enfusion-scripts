@@ -1,0 +1,32 @@
+GenericEntity : "{9E51BE88453B8DE1}Prefabs/Props/Civilian/Billiard_01/Billiard_01_ball_base.et" {
+ ID "F0DBA538AC2A0552"
+ components {
+  MeshObject "{5872F0EB7FA40561}" {
+   Materials {
+    MaterialAssignClass "{5E4E654EA751BFB8}" {
+     SourceMaterial "Color_palette"
+     AssignedMaterial "{390C4C5577643B35}Assets/shockwave_base.emat"
+    }
+    MaterialAssignClass "{687CFA52319BD1FD}" {
+     SourceMaterial "Common/Materials/Default"
+     AssignedMaterial "{390C4C5577643B35}Assets/shockwave_base.emat"
+    }
+   }
+  }
+  REAB_ShockwaveComponent "{687CFA503DA95449}" {
+  }
+  RigidBody "{5872F0EB7DFB5A9D}" {
+   Layers 0x40000 0
+  }
+  SCR_DestructionMultiPhaseComponent "{5624A88D86EFE8BA}" {
+   Enabled 0
+   m_DestroySpawnObjects {
+    SCR_DebrisSpawnable "{5A4CB088E1F16BA0}" {
+     m_ModelPrefabs {
+      "{39931E76712C89D6}Prefabs/Props/Civilian/Billiard_01/Billiard_01_ball_white.et"
+     }
+    }
+   }
+  }
+ }
+}

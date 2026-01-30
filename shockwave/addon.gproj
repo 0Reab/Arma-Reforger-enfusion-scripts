@@ -1,0 +1,8 @@
+GameProject {
+ ID "shockwave"
+ GUID "687CF7F4F0B1CC1D"
+ TITLE "shockwave"
+ Dependencies {
+  "58D0FB3206B6F859"
+ }
+}
