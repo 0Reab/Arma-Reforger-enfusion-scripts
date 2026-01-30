@@ -1,0 +1,45 @@
+MatPBRMulti {
+ SpecularIBL 1 0.995 0.918 1
+ Specular 0.585 0.64 0.644 1
+ RoughnessScale 0.948
+ MetalnessScale 0.738
+ DielectricReflectance 0.054
+ CavityFromAO 0.222
+ OverlayBlackPower 1
+ MaskMap "{761F846BF5863A04}Assets/Weapons/GrenadeLaunchers/gm94/Data/Aluminium_MASK.edds"
+ MaskRedScale 1.158
+ MaskGreenScale 1.014
+ Enabled_4 1
+ Color_4 0 0 0 1
+ MaskSharpness_4 0.212
+ Roughness_4 1.062
+ Enabled_3 1
+ Color_3 0 0 0 1
+ BCR_3 "{D1B7D068224BE867}Common/Textures/Camouflage/T_CamoSnow_01_BC.edds"
+ MaskSharpness_3 1.178
+ UVTransform_3 MatUVTransform "{6250AC70E544457A}" {
+  TilingU 2.6
+  TilingV 3.2
+  OffsetU -0.722
+  Rotation 70.193
+ }
+ Roughness_3 0.83
+ Metalness_3 0
+ Enabled_2 1
+ Color_2 0 0 0 1
+ NMO_2 "{27CC300417A1C928}Assets/_SharedData/Plaster/ST_Plaster_Clean_BW_02_NMO.edds"
+ MaskSharpness_2 0.425
+ MaskUVScale_2 3.186
+ UVTransform_2 MatUVTransform "{6250AC71AA42EDAC}" {
+  TilingU 4
+  TilingV 4
+ }
+ DetNormal_2 0.154
+ Roughness_2 0.647
+ Metalness_2 0
+ Color_1 0 0 0 1
+ BCR_1 "{837A9A15BFE87894}Assets/Weapons/GrenadeLaunchers/gm94/Data/rhs_gm94AL_BCR.edds"
+ NMO_1 "{BBA22187669F2A0A}Assets/Weapons/GrenadeLaunchers/gm94/Data/rhs_gm94AL_NMO.edds"
+ UVTransform_1 MatUVTransform "{6250AC7303026C54}" {
+ }
+}

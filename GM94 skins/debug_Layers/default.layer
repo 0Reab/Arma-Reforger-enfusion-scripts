@@ -1,0 +1,24 @@
+GenericEntity : "{024ADB1251AAAE27}Prefabs/Weapons/GrenadeLaunchers/GM94/GL_GM94_white_camo.et" {
+ coords 138.188 1.022 142.594
+ angles 0 180 90
+}
+GenericEntity : "{2D71ADCDA7D5D577}Prefabs/Weapons/GrenadeLaunchers/GM94/GL_GM94_gray_camo.et" {
+ coords 138.511 1.017 143.456
+ angles 0 180 90
+}
+GenericEntity : "{42A8EC0AF5558F00}Prefabs/Weapons/GrenadeLaunchers/GM94/GL_GM94_green.et" {
+ coords 138.483 1.009 142.599
+ angles 0 180 90
+}
+GenericEntity : "{95B509384527E12A}Prefabs/Weapons/GrenadeLaunchers/GM94/GL_GM94_black_camo.et" {
+ coords 138.819 1.012 143.444
+ angles 0 180 90
+}
+GenericEntity : "{AC018F0254D3A663}Prefabs/Weapons/GrenadeLaunchers/GM94/GL_GM94_green_camo.et" {
+ coords 138.784 1.017 142.592
+ angles 0 180 90
+}
+GenericEntity : "{C76FE181D0C13E4C}Prefabs/Weapons/GrenadeLaunchers/GM94/GL_GM94_tan.et" {
+ coords 138.228 1.018 143.445
+ angles 0 180 90
+}

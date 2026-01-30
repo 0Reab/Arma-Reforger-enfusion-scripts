@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{585A840D542DCB96}Assets/Weapons/GrenadeLaunchers/gm94/Data/Aluminium_Camo_black.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass PS5 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}

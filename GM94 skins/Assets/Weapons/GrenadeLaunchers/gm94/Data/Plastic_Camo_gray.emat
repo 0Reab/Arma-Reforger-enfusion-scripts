@@ -1,0 +1,27 @@
+MatPBRMulti {
+ Specular 0.573 0.573 0.573 1
+ MCROpacityBlend 0.935
+ MCRBrightness 5
+ MaskMap "{9C1F80506A3C01C8}Assets/Weapons/GrenadeLaunchers/gm94/Data/Plastic_MASK.edds"
+ MaskRedScale 1.573
+ MaskGreenScale 1.014
+ MaskBlueScale 1
+ Enabled_3 1
+ Color_3 0.18 0.2 0.205 1
+ BCR_3 "{D1B7D068224BE867}Common/Textures/Camouflage/T_CamoSnow_01_BC.edds"
+ UVTransform_3 MatUVTransform "{6250AC72AF9756C7}" {
+  TilingV 3.35
+ }
+ Roughness_3 0.878
+ Metalness_3 0
+ Enabled_2 1
+ Color_2 0.178 0.178 0.178 1
+ NMO_2 "{27CC300417A1C928}Assets/_SharedData/Plaster/ST_Plaster_Clean_BW_02_NMO.edds"
+ MaskUVScale_2 3.186
+ DetNormal_2 0.154
+ Roughness_2 0.473
+ Metalness_2 0
+ Color_1 0 0 0 1
+ BCR_1 "{4657B08A61FA4DB2}Assets/Weapons/GrenadeLaunchers/gm94/Data/rhs_gm94PL_BCR.edds"
+ NMO_1 "{7E8F0B18B88D1F2C}Assets/Weapons/GrenadeLaunchers/gm94/Data/rhs_gm94PL_NMO.edds"
+}

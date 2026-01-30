@@ -1,0 +1,12 @@
+MatPBRBasic {
+ Color 0.602 0.738 0.574 1
+ SpecularIBL 1 0.845 0.503 1
+ Specular 0.716 0.979 1 1
+ SpecularMul 1.25
+ RoughnessScale 0.948
+ MetalnessScale 0.5
+ DielectricReflectance 0.054
+ CavityFromAO 0.222
+ BCRMap "{837A9A15BFE87894}Assets/Weapons/GrenadeLaunchers/gm94/Data/rhs_gm94AL_BCR.edds"
+ NMOMap "{BBA22187669F2A0A}Assets/Weapons/GrenadeLaunchers/gm94/Data/rhs_gm94AL_NMO.edds"
+}

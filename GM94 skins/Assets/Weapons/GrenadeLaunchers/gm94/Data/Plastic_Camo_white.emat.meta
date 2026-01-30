@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{77600E9AA43F2897}Assets/Weapons/GrenadeLaunchers/gm94/Data/Plastic_Camo_white.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass PS5 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}

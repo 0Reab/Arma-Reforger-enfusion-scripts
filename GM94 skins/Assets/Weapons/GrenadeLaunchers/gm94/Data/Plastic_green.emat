@@ -1,0 +1,8 @@
+MatPBRBasic {
+ Color 0.602 0.738 0.574 1
+ SpecularIBL 0.957 1 0.468 1
+ Specular 0.578 0.92 1 1
+ SpecularMul 1.25
+ BCRMap "{4657B08A61FA4DB2}Assets/Weapons/GrenadeLaunchers/gm94/Data/rhs_gm94PL_BCR.edds"
+ NMOMap "{7E8F0B18B88D1F2C}Assets/Weapons/GrenadeLaunchers/gm94/Data/rhs_gm94PL_NMO.edds"
+}

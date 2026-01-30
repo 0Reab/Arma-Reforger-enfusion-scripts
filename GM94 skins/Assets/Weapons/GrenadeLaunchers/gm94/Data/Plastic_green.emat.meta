@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{CEDBEDABD9D325C8}Assets/Weapons/GrenadeLaunchers/gm94/Data/Plastic_green.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass PS5 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}

@@ -1,0 +1,17 @@
+GenericEntity : "{B131613386C19802}Prefabs/Weapons/GrenadeLaunchers/GM94/GL_GM94_base.et" {
+ ID "CFBAA4B725411E45"
+ components {
+  MeshObject "{CFBAA4B701F95D69}" {
+   Materials {
+    MaterialAssignClass "{686CD7302379F88F}" {
+     SourceMaterial "Aluminium"
+     AssignedMaterial "{9AC9E59379016226}Assets/Weapons/GrenadeLaunchers/gm94/Data/Aluminium_tan.emat"
+    }
+    MaterialAssignClass "{686CD7302379F890}" {
+     SourceMaterial "Plastic"
+     AssignedMaterial "{3E5056E538CC6B8E}Assets/Weapons/GrenadeLaunchers/gm94/Data/Plastic_tan.emat"
+    }
+   }
+  }
+ }
+}
