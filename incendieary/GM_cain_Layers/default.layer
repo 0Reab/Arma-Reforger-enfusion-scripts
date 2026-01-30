@@ -1,0 +1,17 @@
+$grp SCR_ChimeraCharacter : "{26A9756790131354}Prefabs/Characters/Factions/BLUFOR/US_Army/Character_US_Rifleman.et" {
+ {
+  coords 6010.353 419.871 6334.868
+ }
+ {
+  coords 6011.414 419.809 6336.01
+ }
+ {
+  coords 6011.468 419.789 6337.602
+ }
+}
+GenericEntity : "{45C675ED3CFBBEC5}Prefabs/Props/Military/Compositions/US/ArsenalBox_US.et" {
+ coords 6008.357 419.98 6338.136
+}
+SCR_SpawnPoint : "{5A2220DD0C16958B}Prefabs/MP/Spawning/SpawnPoint_US.et" {
+ coords 6009.293 419.919 6337.043
+}

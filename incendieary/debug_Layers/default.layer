@@ -1,0 +1,111 @@
+$grp GenericEntity {
+ {
+  coords 2157.956 57.092 2097.358
+  angles -0.614 43.303 0
+ }
+ {
+  coords 2157.982 57.092 2097.01
+  angles -0.614 43.303 0
+ }
+ {
+  coords 2157.722 57.096 2096.892
+  angles -0.614 43.303 0
+ }
+ {
+  coords 1450.461 11.25 1927.577
+ }
+}
+$grp Projectile {
+ {
+  coords 2156.948 57.079 2097.002
+ }
+ {
+  coords 2156.744 57.082 2097.057
+ }
+ {
+  coords 2157.26 57.074 2096.993
+ }
+}
+$grp SCR_ChimeraCharacter : "{26A9756790131354}Prefabs/Characters/Factions/BLUFOR/US_Army/Character_US_Rifleman.et" {
+ {
+  coords 1453.908 11.411 1920.277
+ }
+ {
+  coords 1453.865 11.411 1921.319
+ }
+ {
+  coords 1454.033 11.411 1918.707
+ }
+ {
+  coords 1455.529 11.411 1921.932
+ }
+}
+GenericEntity : "{2F17BFBCDB329CCA}Prefabs/Props/Military/Compositions/US/ArsenalBox_US_Weapons.et" {
+ coords 1449.044 11.25 1921.067
+ angles 0 0 0
+}
+GameEntity : "{43FDAF3FA0FF2299}Prefabs/Weapons/Attachments/Underbarrel/UGL_M203_long.et" {
+ coords 2156.38 57.149 2097.298
+}
+$grp GenericEntity : "{45C675ED3CFBBEC5}Prefabs/Props/Military/Compositions/US/ArsenalBox_US.et" {
+ {
+  coords 2160.699 57.031 2094.645
+ }
+ {
+  coords 1442.986 38.493 2960.213
+ }
+}
+$grp GenericEntity : "{A28E5D231A74D95D}Prefabs/Props/Military/Compositions/US/ArsenalBox_US_Equipment.et" {
+ {
+  coords 2162.408 57.031 2094.566
+  angles 0 0 0
+ }
+ {
+  coords 1449.22 11.25 1922.868
+  angles 0 0 0
+ }
+}
+GenericEntity : "{BE99D77D1155B127}Prefabs/Props/Military/Arsenal/ArsenalBoxes/US/ArsenalBox_US.et" {
+ coords 2158.778 57.05 2095.372
+}
+$grp GenericEntity : "{DAAC3C3E81A298D1}Prefabs/Weapons/Grenades/M18/Custom_Smoke_M18_Red.et" {
+ {
+  coords 2152.575 57.239 2098.721
+ }
+ {
+  coords 2152.575 57.239 2098.877
+ }
+ {
+  coords 2152.575 57.239 2098.98
+ }
+ {
+  coords 2152.575 57.239 2099.099
+ }
+ {
+  coords 2152.575 57.239 2099.252
+ }
+ {
+  coords 1396.222 39.265 1967.723
+ }
+ {
+  coords 1396.607 39.265 1967.723
+ }
+ {
+  coords 1396.933 39.265 1967.723
+ }
+ {
+  coords 1397.323 39.265 1967.723
+ }
+ {
+  coords 1448.786 11.269 1927.538
+ }
+ {
+  coords 1448.792 11.269 1927.266
+ }
+ {
+  coords 1448.792 11.269 1926.969
+ }
+ {
+  coords 1448.792 11.269 1926.628
+ }
+}

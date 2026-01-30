@@ -1,0 +1,8 @@
+GameProject {
+ ID "incendieary"
+ GUID "66D75C53F4ED7972"
+ TITLE "incendieary"
+ Dependencies {
+  "58D0FB3206B6F859"
+ }
+}

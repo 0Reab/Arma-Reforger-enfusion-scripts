@@ -1,0 +1,48 @@
+EffectDef {
+ Version 2
+ Emitters {
+  EmitterDef sparks {
+   ConeAngle 360 0 180
+   MaxNum 90
+   BirthRate 100
+   BirthRateRND 36.8
+   LodMin 0
+   LodMax 1
+   Material "{2DF4058A4066E031}Particles/_Materials/Fire/Base_Sparks_07.emat"
+   StretchMultiplier 1.007
+   SizeMultiplier 0.03
+   SizeRND 0
+   ScaleX 0.25
+   ScaleY 0.5
+   CenterY 0
+   BillboardingType Full
+   VelAngle 1
+   RandomAngle 0
+   Velocity 40
+   VelocityRND 40
+   AirResistance 10
+   AirResistanceRND 10
+   WindInfluence 0.1
+   GravityMultiply 0.3
+   GravityMultiplyRND 0
+   EnableCollisions 1
+   RandomFrame 1
+   Lifetime 0.6
+   LifetimeRND 0.3
+   Color {
+    0 1 1 1 1 1 1 1
+   }
+   Alpha {
+    0 1 1 0
+   }
+   EmittingTime 20
+   Repeat 0
+  }
+ }
+ MinFPS 30
+ CollisionPreset "{5DC8DBF6E2ACBAF5}"
+ LightOffset 0 3 0
+ LightClipEV -16
+ LightRadius 30
+ CastShadow 1
+}

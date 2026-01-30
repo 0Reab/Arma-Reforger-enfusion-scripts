@@ -1,0 +1,71 @@
+GenericEntity : "{3343A055A83CB30D}Prefabs/Weapons/Grenades/M18/Smoke_M18_Red.et" {
+ ID "51F94178FC806356"
+ components {
+  TimerTriggerComponent "{5934C8C5C9FDF999}" {
+   PROJECTILE_EFFECTS {
+    SpawnParticleEffect "{5CAADB9AD0C61F3F}" {
+     ParticleEffect "{4BAAC0C16AF4146B}Particles/Logistics/Fire/Ammunition_Fire/Custom_Ammunition_Fire_small.ptc"
+    }
+    SpawnParticleEffect "{66E0D4D2B5494FE1}" {
+     AttachToParent 1
+     UseFrameEvent 1
+     ParticleEffect "{9E14816DFAB9F662}Particles/Weapon/Custom_Explosion_APDS.ptc"
+    }
+    SpawnParticleEffect "{66E0D4D5547986FC}" {
+     Enabled 0
+     UseFrameEvent 1
+     ParticleEffect "{36D48039D3B00303}Particles/Weapon/Custom_Explosion_API.ptc"
+    }
+    SpawnParticleEffect "{66DF409F11B79D8B}" {
+     AttachToParent 1
+     FollowParent 1
+     UseFrameEvent 1
+     ParticleEffect "{31EBF822D5EA1652}Particles/Weapon/Custom_Trail_M229.ptc"
+     SoundEvent "6000"
+    }
+    SpawnParticleEffect "{66DF409494D2D8AA}" {
+     FollowParent 1
+     UseFrameEvent 1
+     ParticleEffect "{69E8BE3487B51149}Particles/Enviroment/Custom_Campfire_medium_normal.ptc"
+     SoundEvent "6000"
+    }
+    ExplosionEffect "{66DF40962142CF36}" {
+     EffectPrefab "{9FEB36FF5F73F93D}Prefabs/Weapons/Warheads/Fires/Custom_Warhead_Fire_Base.et"
+    }
+   }
+   TIMER 2
+  }
+  AICombatPropertiesComponent "{66E0D4E37D98D391}" {
+   Priority 4
+   PriorityAgainstVehicles 37
+   UsedAgainst 0x1 0
+   IndirectlyUsedAgainst 0x1 0
+  }
+  GrenadeMoveComponent "{1F80A73ADE35BFF1}" {
+   IsDangerous 1
+  }
+  InventoryItemComponent "{51FAA3E3CF6F087A}" {
+   Attributes SCR_ItemAttributeCollection "{51FAA3E3C2D19BD4}" {
+    ItemDisplayName WeaponUIInfo "{56CA90F8CF590D0D}" {
+     Name "Incendiary Grenade"
+     Description ""
+    }
+   }
+  }
+  MeshObject "{51EC93F29BA5F234}" {
+   Materials {
+    MaterialAssignClass "{66DF39FBFD1A4E91}" {
+     SourceMaterial "m18"
+     AssignedMaterial "{5BCE4D6DC5BD6415}Assets/Weapons/Grenades/M18/Data/Custom_m18_red.emat"
+    }
+   }
+  }
+  REAB_ContactComponent "{66DF39FBE25E2BFA}" {
+   m_fDamageDuration 13
+   m_fFuseDelay 2
+  }
+  WeaponComponent "{6D23670EA18BF513}" {
+   WeaponType FragGrenade
+  }
+ }
+}

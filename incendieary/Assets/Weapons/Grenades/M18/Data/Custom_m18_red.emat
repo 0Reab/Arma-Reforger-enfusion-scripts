@@ -1,0 +1,4 @@
+MatPBRBasic : "{3E546E6BDB6DC926}Assets/Weapons/Grenades/M18/Data/m18_red.emat" {
+ Color 0.651 0.017 0.017 1
+ SpecularIBL 1 0.095 0.095 1
+}

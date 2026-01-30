@@ -1,0 +1,43 @@
+GenericEntity : "{E5965C8A004629D0}Prefabs/Weapons/Warheads/Fires/Warhead_Fire_Base.et" {
+ ID "9D9BE68EA2672F76"
+ components {
+  TimerTriggerComponent "{55129E81CBAA1390}" {
+   PROJECTILE_EFFECTS {
+    ExplosionDamageContainer "{5D8D1EB2400CDFFE}" {
+     TriggerOnce 0
+     Enabled 0
+     ExplosionEffects {
+      BaseExplosionDamage "{66DF409735F1C82D}" : "{B2B2A3CF7ECFE29E}Prefabs/Weapons/Core/Damage/IncendiaryDamageEffect_Continuous.conf" {
+       DamageDistance 10
+       ExplosionEffectSpeed 100
+      }
+      BaseExplosionDamage "{66DF4097073C4260}" : "{B2B2A3CF7ECFE29E}Prefabs/Weapons/Core/Damage/IncendiaryDamageEffect_Continuous.conf" {
+       DamageDistance 10
+       ExplosionEffectSpeed 1000
+      }
+     }
+    }
+    SpawnDecalEffect "{5E24C6340FE0175F}" {
+     Enabled 1
+    }
+   }
+  }
+  TimerTriggerComponent "{60DD0C27D8FD2CA4}" {
+   PROJECTILE_EFFECTS {
+    ExplosionDamageContainer "{66DF4090AAEC5392}" {
+     ExplosionEffects {
+      BaseExplosionDamage "{66DF4090AF890186}" {
+       DamageValue 100.2
+       DamageType Fire
+       DamageDistance 15
+      }
+     }
+     TntEquivalent 0.175
+     LayerPreset "Projectile"
+    }
+   }
+   DELETE_ON_TRIGGER 0
+   TIMER 4
+  }
+ }
+}

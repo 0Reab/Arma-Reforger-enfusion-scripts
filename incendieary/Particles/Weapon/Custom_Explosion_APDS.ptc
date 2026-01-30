@@ -1,0 +1,177 @@
+EffectDef {
+ Version 2
+ Emitters {
+  EmitterDef sparks_close {
+   ConeAngle 360 0 50
+   ConeAngleRndRange 50
+   MaxNum 1000
+   BirthRate 300
+   LodMin 0
+   LodMax 2
+   Material "{2DF4058A4066E031}Particles/_Materials/Fire/Base_Sparks_07.emat"
+   StretchMultiplier 1.02
+   SizeMultiplier 0.01
+   SizeRND 0
+   ScaleX 0.25
+   ScaleY 0.5
+   CenterY 0
+   BillboardingType Full
+   VelAngle 1
+   RandomAngle 0
+   Velocity 35
+   VelocityRND 12
+   AirResistance 3
+   AirResistanceRND 3.5
+   WindInfluence 0.07
+   GravityMultiply 0.25
+   GravityMultiplyRND 0.3
+   EnableCollisions 1
+   RandomFrame 1
+   Lifetime 0.8
+   LifetimeRND 1.3
+   Color {
+    0 1 1 1 1 1 1 1
+   }
+   Alpha {
+    0 1 0.773 0.805 1 0
+   }
+   EmittingTime 20
+   Repeat 0
+   VelocityMast {
+    0 1 0.916 0.13
+   }
+  }
+  EmitterDef sparks_further {
+   ConeAngle 360 0 75
+   ConeAngleRndRange 75
+   MaxNum 500
+   BirthRate 60
+   LodMin 0
+   LodMax 2
+   Material "{2DF4058A4066E031}Particles/_Materials/Fire/Base_Sparks_07.emat"
+   StretchMultiplier 1.02
+   SizeMultiplier 0.03
+   SizeRND 0
+   ScaleX 0.25
+   ScaleY 0.5
+   CenterY 0
+   BillboardingType Full
+   VelAngle 1
+   RandomAngle 0
+   Velocity 45
+   VelocityRND 12
+   AirResistance 3
+   AirResistanceRND 3.5
+   WindInfluence 0.1
+   GravityMultiply 0.15
+   GravityMultiplyRND 0.25
+   EnableCollisions 1
+   RandomFrame 1
+   Lifetime 0.7
+   LifetimeRND 1.3
+   Color {
+    0 1 1 1 1 1 1 1
+   }
+   Alpha {
+    0 1 1 0
+   }
+   EmittingTime 20
+   Repeat 0
+   VelocityMast {
+    0 1 1 0.175
+   }
+  }
+  EmitterDef sparks_cluster_0 {
+   ShapeSize 1 1 1
+   ConeAngle 360 0 60
+   ConeAngleRndRange 60
+   MaxNum 300
+   BirthRate 600
+   BirthRateRND 100
+   LodMin 0
+   LodMax 0
+   Material "{EC21EF39434B038E}Particles/_Materials/Sparks_multiple.emat"
+   SizeMultiplier 0.4
+   SizeRND 0.3
+   ScaleX 1
+   ScaleY 1
+   RotMultiplier 1
+   RotRND 2
+   RandomRotDir 1
+   BillboardingType Full
+   RandomAngle 1
+   FlipU Random
+   FlipV Random
+   Velocity 7
+   VelocityRND 2
+   AirResistance 2
+   AirResistanceRND 0.5
+   WindInfluence 0.07
+   GravityMultiply 0.1
+   RandomFrame 1
+   Lifetime 0.2
+   LifetimeRND 0.4
+   Color {
+    0 1 0.7863 0.5647
+   }
+   Alpha {
+    0 1 0.5558 0.7827 1 0
+   }
+   Size {
+    0 0.1 0.3 0.7 1 1
+   }
+   EmittingTime 20
+   Repeat 0
+   VelocityMast {
+    0 1 0.916 0.13
+   }
+  }
+  EmitterDef sparks_cluster_1 {
+   ShapeSize 1 1 1
+   ConeAngle 360 0 30
+   ConeAngleRndRange 30
+   MaxNum 100
+   BirthRate 15.1
+   BirthRateRND 50.5
+   LodMin 1
+   LodMax 1
+   Material "{EC21EF39434B038E}Particles/_Materials/Sparks_multiple.emat"
+   SizeMultiplier 2
+   SizeRND 2
+   ScaleX 1
+   ScaleY 1
+   RotMultiplier 1
+   RotRND 2
+   RandomRotDir 1
+   BillboardingType Full
+   RandomAngle 1
+   Velocity 10
+   VelocityRND 2
+   AirResistance 2
+   AirResistanceRND 0.5
+   WindInfluence 0.07
+   GravityMultiply 0.1
+   RandomFrame 1
+   Lifetime 0.3
+   LifetimeRND 0.3
+   Color {
+    0 1 0.7863 0.5647
+   }
+   Alpha {
+    0 1 0.5558 0.7827 1 0
+   }
+   Size {
+    0 0.1 0.3 0.7 1 1
+   }
+   Repeat 0
+   VelocityMast {
+    0 1 0.916 0.13
+   }
+  }
+ }
+ MinFPS 30
+ LightOffset 0 1 0
+ LightClipEV -20
+ LightRadius 3
+ CastShadow 1
+}

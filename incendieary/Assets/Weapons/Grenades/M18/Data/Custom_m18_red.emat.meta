@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{5BCE4D6DC5BD6415}Assets/Weapons/Grenades/M18/Data/Custom_m18_red.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass PS5 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}

@@ -1,0 +1,90 @@
+EffectDef {
+ Version 2
+ Emitters {
+  EmitterDef halo {
+   ShapeType Point
+   ShapeSize 0.05 0.05 0.05
+   ConeAngle 0 0 0
+   MaxNum 1
+   BirthRate 1000
+   LocalTransform 1
+   LodMin 0
+   LodMax 2
+   Material "{4392655F611C4B81}Particles/_Materials/Fire/Explosion_Base_03_Rocket.emat"
+   SizeMultiplier 0.25
+   SizeRND 0.1
+   RandomRotDir 0
+   RandomAngle 1
+   Velocity 0
+   AnimOnce 0
+   RandomFrame 1
+   Lifetime 0.03
+   LifetimeRND 0
+   Color {
+    0 1 1 1 1 1 1 1
+   }
+   Repeat 0
+  }
+  EmitterDef glow {
+   ShapeType Point
+   ShapeSize 0.05 0.05 0.05
+   ConeAngle 0 0 0
+   MaxNum 1
+   BirthRate 5000
+   Offset 0 0.7 0
+   LocalTransform 1
+   LodMin 0
+   LodMax 2
+   Material "{E6D017C82E09CA29}Particles/_Materials/Fire/Muzzle_Front.emat"
+   SizeMultiplier 1.5
+   SizeRND 0.3
+   ScaleX 0.3
+   RandomRotDir 0
+   BillboardingType LockedAxis
+   Velocity 0
+   AnimOnce 0
+   RandomFrame 1
+   Lifetime 0.03
+   LifetimeRND 0
+   Color {
+    0 1 0.804 0.08
+   }
+   Repeat 0
+   AlphaMast {
+    0 0.7
+   }
+  }
+  EmitterDef Smoke_static {
+   ShapeType Point
+   ShapeSize 0.05 0.05 0.05
+   MaxNum 1
+   BirthRate 5000
+   Offset 0 0 -1.6
+   Angles 90 0 0
+   LocalTransform 1
+   LodMin 0
+   LodMax 2
+   Material "{825F520C86D0DE46}Particles/_Materials/Gas/Smoke_Base_Pillar_05.emat"
+   SizeMultiplier 1.3
+   SizeRND 0.3
+   ScaleX 0.4
+   RandomRotDir 0
+   BillboardingType LockedAxis
+   FlipU Random
+   Velocity 5
+   AnimOnce 0
+   RandomFrame 1
+   Lifetime 0.03
+   LifetimeRND 0
+   Color {
+    0 0.05 0.05 0.05
+   }
+   Emissivity {
+    0 0
+   }
+   Repeat 0
+  }
+ }
+ LightClipEV -20
+ LightRadius 2
+}

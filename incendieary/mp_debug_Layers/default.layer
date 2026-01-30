@@ -1,0 +1,29 @@
+GenericEntity : "{2F17BFBCDB329CCA}Prefabs/Props/Military/Compositions/US/ArsenalBox_US_Weapons.et" {
+ coords 128.135 1 141.169
+ angles 0 0 0
+}
+$grp SCR_ChimeraCharacter : "{8515E8BD26A5D5F8}Prefabs/Characters/Factions/INDFOR/FIA/Character_FIA_Randomized.et" {
+ {
+  coords 127.313 1 137.74
+ }
+ {
+  coords 126.665 1 137.74
+ }
+ {
+  coords 126.016 1 137.74
+ }
+}
+Vehicle BTR70_FIA1 : "{B47110AA1A806556}Prefabs/Vehicles/Wheeled/BTR70/BTR70_FIA.et" {
+ coords 122.927 1.045 139.297
+}
+$grp GenericEntity : "{DAAC3C3E81A298D1}Prefabs/Weapons/Grenades/M18/Custom_Smoke_M18_Red.et" {
+ {
+  coords 127.764 1.083 139.62
+ }
+ {
+  coords 127.93 1.083 139.62
+ }
+ {
+  coords 128.12 1.083 139.62
+ }
+}
