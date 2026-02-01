@@ -1,0 +1,8 @@
+GameProject {
+ ID "gmsnappingbutton"
+ GUID "687EE407F9B26A7F"
+ TITLE "gm_snapping_button"
+ Dependencies {
+  "58D0FB3206B6F859"
+ }
+}

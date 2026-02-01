@@ -1,0 +1,125 @@
+SizeLayoutWidgetClass {
+ {
+  VerticalLayoutWidgetClass "{59DC83B35C14D8B3}" {
+   Prefab "{59DC83B35C14D8B3}"
+   {
+    HorizontalLayoutWidgetClass "{59DC838832952D77}" {
+     Prefab "{59DC838832952D77}"
+     {
+      VerticalLayoutWidgetClass "{59F478C4D1E8D8BC}" {
+       Prefab "{59F478C4D1E8D8BC}"
+       {
+        SizeLayoutWidgetClass "{0000000041B59A6F}" {
+         Prefab "{0000000041B59A6F}"
+         {
+          HorizontalLayoutWidgetClass "{54ACA2928A1FCB02}" {
+           Prefab "{54ACA2928A1FCB02}"
+           {
+            FrameWidgetClass "{687EEB23623B6AB5}" : "{1A59D452382E9491}REAB_Button_Base.layout" {
+             Name "Frame_Modded_REAB"
+             Slot LayoutSlot "{687EEB23CEB5AF72}" {
+              Padding 5 0 5 0
+             }
+             {
+              SizeLayoutWidgetClass "{687EEB23BD400E10}" {
+               Prefab "{687EEB23BD400E10}"
+               Slot FrameWidgetSlot "{687EEB23BD400E26}" {
+                SizeToContent 1
+               }
+               {
+                OverlayWidgetClass "{687EEB23AB941846}" {
+                 Prefab "{687EEB23AB941846}"
+                 Slot AlignableSlot "{687EEB23AB94186E}" {
+                 }
+                 {
+                  ButtonWidgetClass "{687EEB2390177D34}" {
+                   Prefab "{687EEB2390177D34}"
+                   Slot OverlayWidgetSlot "{687EEB2390177D5E}" {
+                    HorizontalAlign 3
+                    VerticalAlign 3
+                   }
+                   Opacity 0.75
+                   Tooltip TextWidgetTooltip "{687EEB2121F37FE2}" {
+                    Text "Toggle entity snapping to terrain (ON - OFF)"
+                   }
+                   Color 0.0953 0.0947 0 1
+                   components {
+                    REAB_GmSnappingComponent "{687EEB244E81B46B}" {
+                    }
+                   }
+                   "no focus" 1
+                  }
+                  ImageWidgetClass "{687EEB2394391603}" {
+                   Prefab "{687EEB2394391603}"
+                   Slot OverlayWidgetSlot "{687EEB239439162B}" {
+                   }
+                   Color 1 1 1 1
+                   Texture "{8657510D7940031F}UI/Textures/Workshop/DownloadManager/DownloadManager_DownloadingIcon_UI.edds"
+                   Size 32 32
+                  }
+                 }
+                }
+               }
+              }
+             }
+            }
+            FrameWidgetClass "{687EEB20A1EE6FCA}" : "{1A59D452382E9491}REAB_Button_Base.layout" {
+             Name "Frame_Modded_REAB0"
+             Slot LayoutSlot "{687EEB23CEB5AF72}" {
+              Padding 5 0 5 0
+             }
+             {
+              SizeLayoutWidgetClass "{687EEB23BD400E10}" {
+               Prefab "{687EEB23BD400E10}"
+               Slot FrameWidgetSlot "{687EEB23BD400E26}" {
+                SizeToContent 1
+               }
+               {
+                OverlayWidgetClass "{687EEB23AB941846}" {
+                 Prefab "{687EEB23AB941846}"
+                 Slot AlignableSlot "{687EEB23AB94186E}" {
+                 }
+                 {
+                  ButtonWidgetClass "{687EEB2390177D34}" {
+                   Prefab "{687EEB2390177D34}"
+                   Slot OverlayWidgetSlot "{687EEB2390177D5E}" {
+                    HorizontalAlign 3
+                    VerticalAlign 3
+                   }
+                   Opacity 0.75
+                   Tooltip TextWidgetTooltip "{687EEB26CFE27E86}" {
+                    Text "Toggle entity snapping (sea level - geometry)"
+                   }
+                   Color 0.0008 0.0742 0 1
+                   components {
+                    REAB_GmOrientComponent "{687EEB2444CE1ED5}" {
+                    }
+                   }
+                   "no focus" 1
+                  }
+                  ImageWidgetClass "{687EEB2394391603}" {
+                   Prefab "{687EEB2394391603}"
+                   Slot OverlayWidgetSlot "{687EEB239439162B}" {
+                   }
+                   Color 1 1 1 1
+                   Texture "{A2738F1A7C0902C1}UI/Textures/Workshop/SearchIcon.edds"
+                   Size 32 32
+                  }
+                 }
+                }
+               }
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

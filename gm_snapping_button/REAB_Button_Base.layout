@@ -1,0 +1,34 @@
+FrameWidgetClass "{687EEB23CEB5AF56}" {
+ Name "Frame0"
+ Slot LayoutSlot "{687EEB23CEB5AF72}" {
+  HorizontalAlign 1
+  VerticalAlign 1
+ }
+ {
+  SizeLayoutWidgetClass "{687EEB23BD400E10}" {
+   Name "SizeLayout0"
+   Slot FrameWidgetSlot "{687EEB23BD400E26}" {
+   }
+   {
+    OverlayWidgetClass "{687EEB23AB941846}" {
+     Name "Overlay0"
+     Slot AlignableSlot "{687EEB23AB94186E}" {
+     }
+     {
+      ButtonWidgetClass "{687EEB2390177D34}" {
+       Name "Button0"
+       Slot OverlayWidgetSlot "{687EEB2390177D5E}" {
+       }
+      }
+      ImageWidgetClass "{687EEB2394391603}" {
+       Name "Image0"
+       Slot OverlayWidgetSlot "{687EEB239439162B}" {
+       }
+       Color 1 0.0152 0.0152 1
+      }
+     }
+    }
+   }
+  }
+ }
+}
