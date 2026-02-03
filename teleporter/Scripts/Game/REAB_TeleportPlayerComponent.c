@@ -25,7 +25,6 @@ class REAB_TeleportPlayerComponent: ScriptComponent
     {
 		GetTeleportPosition();
         TeleportPlayer();
-		//Print(destination);
     }
 	
 	//------------------------------------------------------------------------------------------------
@@ -43,30 +42,27 @@ class REAB_TeleportPlayerComponent: ScriptComponent
 	//------------------------------------------------------------------------------------------------
     protected bool TeleportPlayer()
 	{
-		IEntity player = GetOwner();
 		if (destination[3] == vector.Zero)
 			return false;
 		
-		vector previousOrigin = player.GetOrigin();
+		IEntity user = GetOwner();
+		
+		vector previousOrigin = user.GetOrigin();
 	
-	    BaseGameEntity baseGameEntity = BaseGameEntity.Cast(player);
-	    if (baseGameEntity && !BaseVehicle.Cast(baseGameEntity))
-	    {
-	        baseGameEntity.Teleport(destination);
-	    }
-	    else
-	    {
-	        player.SetWorldTransform(destination);
-	    }
+		ChimeraCharacter character = ChimeraCharacter.Cast(user);
+		if (!character || character.IsInVehicle())
+			return false;
 		
-		RplComponent replication = RplComponent.Cast(player.FindComponent(RplComponent));
-	    if (replication)
-		{
-	        replication.ForceNodeMovement(previousOrigin);
-		}
+	    BaseGameEntity gameEntity = BaseGameEntity.Cast(user);
+	    if (gameEntity)
+			gameEntity.Teleport(destination);
 		
-	    if (!ChimeraCharacter.Cast(player))
-	        player.Update();
+		RplComponent rpl = RplComponent.Cast(user.FindComponent(RplComponent));
+	    if (rpl)
+	        rpl.ForceNodeMovement(previousOrigin);
+		
+	    if (!ChimeraCharacter.Cast(user))
+	        user.Update();
 		
 		destination[3] = vector.Zero;
 		return true;
