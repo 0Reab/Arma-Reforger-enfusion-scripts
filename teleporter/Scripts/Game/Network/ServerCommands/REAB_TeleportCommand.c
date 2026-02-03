@@ -7,15 +7,12 @@ class REAB_TeleportCommand : ScrServerCommand
 	//------------------------------------------------------------------------------------------------
 	override event protected ref ScrServerCmdResult OnChatClientExecution(array<string> argv, int playerId)
 	{
-		Result(true, "");
 		return m_result;
 	}
 
 	//------------------------------------------------------------------------------------------------
 	protected override ref ScrServerCmdResult OnChatServerExecution(array<string> argv, int playerId)
 	{
-		Result(true, "");
-
 		if (argv.Count() < 2)
 		{
 			Result(false, "Usage: #tp <password>", true);
@@ -32,7 +29,7 @@ class REAB_TeleportCommand : ScrServerCommand
 			return m_result;
 		}
 
-		if (!ComparePasswords(inputPassword, correctPassword))
+		if (inputPassword != correctPassword)
 		{
 			Result(false, "Incorrect password");
 			return m_result;
@@ -94,10 +91,6 @@ class REAB_TeleportCommand : ScrServerCommand
 	//------------------------------------------------------------------------------------------------
 	override ref ScrServerCmdResult OnUpdate()
 	{ return ScrServerCmdResult(string.Empty, EServerCmdResultType.OK); }
-	
-	//------------------------------------------------------------------------------------------------
-	protected bool ComparePasswords(string input, string stored)
-	{ return input == stored; }
 	
 	//------------------------------------------------------------------------------------------------
 	override event string GetKeyword()
